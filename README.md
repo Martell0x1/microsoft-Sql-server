@@ -13,5 +13,21 @@
 - column = field = attribute = feature
 - table = Entity set
 
-## MS-SQLserver
+## Data vs Information vs Knowledge vs wisdom
+	# Data vs Information
+		- A data is raw facts
+		- information is data in context(insigts from this data)
+		- Data + Meaning = Information
+		- data is unstructured , info is structered
+		- data is unanalized m info is analyzed
+	# Wisdom vs Knowledge
+		- information with time = knowledge
+		- knowledge with practice (applied) = wisdom
+## database essintials
 
+# what is null.
+	- null = nothing ( has no value , missing)
+	- null != 0 or blank space
+	- it's distinct value in database
+	- if the attribute is optional is set to null
+	 
