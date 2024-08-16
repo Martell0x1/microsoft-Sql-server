@@ -55,3 +55,19 @@
 - To avoid redundancy in DBs , [Normalization] techniques can be used to organize the data in a way that minimizes duplication.
 
 - Normalization is the process of organizing data in a database in a way that reduces redundancy and improves integrity , This involves breaking down the data into smaller , more atomic pieces and linking them together through relationships , which can reduce the amount of redundant data and make it easier ti manage and update the database , Additionally enforcing [data_constrains] such as unique keys and foreign key relationships , can help prevent redundant data from being insetrted into the database.
+
+# Data Integrity
+- Data integrity refers to the accurace , consistency and reliability of data over the entire life cycle , from the creation to deletion, it referse to the assurance that data is complete , accurate , and trustworthy.
+
+- there are several factors that can impact data integrity , including human errors , hardware or software failure , security breaches and transfer errors.
+- to maintain data integreity , it is important to establish appropriate policies and procedures , and to implement appropriate technologies , such as encryption , backups , access controls.
+
+- Data Corrpution - happens when data imegration(when switching from an old system to an old one)
+
+- There're different types of data integrity that organizations need to consider:
+	- Entity Integrity: this ensures that each record / row in the table is unqiye and can be uniquely identified , using the primary keys
+	- Referential Integrity: This ensures that relationships between tables are maintained and that there're no orphaned records , using the foreign keys.
+	- Domain Integrity: This ensures that data is within acceptable ranges or values , Ex. a age field should only contain valid numeric values.
+	- Business integrity : Ensuring that data meets business rules and requirements , a bank might have rules around minimum and macimum account balances.
+
+- To maintain data Integrity we use [Constrains].
