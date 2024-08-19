@@ -1,12 +1,12 @@
-## What's A database
+# What's A database
 - a database is an organized collection of data so that it can be easily accessed.
 - To manage these databases , Databases Mangment System (DBMS) are used
 
-# Types of DBMS
+## Types of DBMS
 - non-relational (DBMS): file , json , xml...
 - relational (RDBMS): mysql , sql-server Oracle...
 
-# why databases
+## why databases
 - the dealing with normal files(DBMS) is so hard compared with databases(RDBMS).
 
 - row = entity = record
@@ -23,29 +23,29 @@
 	# Wisdom vs Knowledge
 		- information with time = knowledge
 		- knowledge with practice (applied) = wisdom
-## database essintials
+# database essintials
 
-# what is null.
+## what is null.
 	- null = nothing ( has no value , missing)
 	- null != 0 or blank space
 	- it's distinct value in database
 	- if the attribute is optional is set to null
 
-# Primary key vs Foreign Key
+## Primary key vs Foreign Key
 - a primary key is a unique identifier for a record(row) , each primary key in each row must be unique (something such as ID column in database is considerd a primary key) , it must not be null , the primary key could be 2 attributes , but it will be slow in searching (so to be more practical consider thinking in 1 attribute to be a primary key) , the VARCHAR datatype couldn't be a primary key (it must be INT) as it will slow down the database seach operations , it will take a large space , each table in the RDB must have a primary key , it's value can't be change
 
 - Foreign key ... it's a  column or set of columns that refere to a primary key in other table , it establishes a relationship between two tables , allowing data to be shared and linked between them.
 
-# Referential Integrity (Data Integrity)
+## Referential Integrity (Data Integrity)
 - The foriegn key ensures that referential integrity is maintained by ensuring that any value in the foreign key column must exist in the primary key column of the related table.
 	 
 - imagine you have a table with the following attributes , ID , Name , Department Id and another table with the attributes Id , Name , Location .... the first table relates to the second table as the Department id in the first table is referencing to the id in the second table .... imagine a situation when you set a department id that doesn't exist in the second table ... this will cause an exception saying that this `foreign key` doesn't refere to that wrong primary key in the second table , so the data integrity is a concept ensures that the `referential integrity` is satisfied (each foreign key must refer to a primary key) , and that the difference between file systems and DBMS.
 
-# Cascade Delete
+## Cascade Delete
 - Deleting any record with the primary key in the second table the is refered by a foriegn key in the first table , so any record with the foreign key refered to the primary key that have been deleted in the second table .. it will be removed (and that's a big problem)
 
 
-# Data Redundancy (Data Dublications)
+## Data Redundancy (Data Dublications)
 - Redundancy of data is the presence od duplicayed copies of data within the database.
 
 -it can also cause problems. For example, redundant data takes up additional storage space and can make it more difficult to maintain consistency within the database. If one copy of the data is updated, the other copies may become outdated, leading to inconsistencies and errors.
@@ -56,7 +56,7 @@
 
 - Normalization is the process of organizing data in a database in a way that reduces redundancy and improves integrity , This involves breaking down the data into smaller , more atomic pieces and linking them together through relationships , which can reduce the amount of redundant data and make it easier ti manage and update the database , Additionally enforcing [data_constrains] such as unique keys and foreign key relationships , can help prevent redundant data from being insetrted into the database.
 
-# Data Integrity
+## Data Integrity
 - Data integrity refers to the accurace , consistency and reliability of data over the entire life cycle , from the creation to deletion, it referse to the assurance that data is complete , accurate , and trustworthy.
 
 - there are several factors that can impact data integrity , including human errors , hardware or software failure , security breaches and transfer errors.
@@ -72,7 +72,7 @@
 
 - To maintain data Integrity we use [Constrains].
 
-# Constraints
+## Constraints
 - rules or conditions that are applied to the data to ensure it's integrity and consistency.
 - Constrains can be applied to individual columns or entire tables, they used to enforce various rules and restrictions on the data
 
@@ -93,7 +93,7 @@
 	- Check Constraint: This is more general constraint that ensures that data in a column or set of columns meets a specified condition.
 
 
-# SQL (Structued Query Language)
+## SQL (Structued Query Language)
 - SQL is used to communicate with a database.
 - SQL lets you access and manipulcate database.
 - Oracle , Sybase , Ms-sql-server , Access , Ingres , etc...
@@ -104,3 +104,6 @@
 	- DCL = Data Control Language (GRANT,REVOKE)
 	- TCL = Transaction Control Language (COMMIT , ROLLBACK , SAVEPOINT)
 	- DQL = Data Query Language (SELECT)
+
+# Database Design.
+- next
