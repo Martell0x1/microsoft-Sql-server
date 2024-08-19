@@ -71,3 +71,36 @@
 	- Business integrity : Ensuring that data meets business rules and requirements , a bank might have rules around minimum and macimum account balances.
 
 - To maintain data Integrity we use [Constrains].
+
+# Constraints
+- rules or conditions that are applied to the data to ensure it's integrity and consistency.
+- Constrains can be applied to individual columns or entire tables, they used to enforce various rules and restrictions on the data
+
+- by using constraints , you can ensure that your data is accurate , consistent , easy to manage.
+
+- Types of constraints:
+	- Primary-key Constraint: this constraint ensures that a column or a set of columns uniquely identifies each row in a table , this constraint helps to enforce data integrity and ensure that there are no duplicated rows in the table.
+
+	- Foreign-key Constraint: This constraint establishes a relation between tow tables based on a key field , it ensures that data in one table matches data in other table , and it helps to maintain refrential integrity in the database.
+
+	- Unique Constraint: This constraint ensures that a column or a set of columns is unqie across all rows in the table , it helps to enforce data integrity and prevent duplicated rows in the table
+
+	[!NOTE] > Unique Constraint Vs Primary-Key constraint?
+		The unqie constraint is just like the primary key constraint except that the unique constraint can accept NULL values , however the Primary-key constraint does not.
+	
+	- Not-Null Constraint: This constraint ensures that a column or a set of columns doesnt have a null (empty) values , it helps to ensure that data is compelete and accurate
+
+	- Check Constraint: This is more general constraint that ensures that data in a column or set of columns meets a specified condition.
+
+
+# SQL (Structued Query Language)
+- SQL is used to communicate with a database.
+- SQL lets you access and manipulcate database.
+- Oracle , Sybase , Ms-sql-server , Access , Ingres , etc...
+
+- Types of Sql Statments:
+	- DDL = Data Definition Language (CREATE , DROP , ALTER , TRUNCATE)
+	- DML = Data Manipulation Language (INSERT , UPDATE , DELETE)
+	- DCL = Data Control Language (GRANT,REVOKE)
+	- TCL = Transaction Control Language (COMMIT , ROLLBACK , SAVEPOINT)
+	- DQL = Data Query Language (SELECT)
