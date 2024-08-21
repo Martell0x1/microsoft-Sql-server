@@ -106,4 +106,13 @@
 	- DQL = Data Query Language (SELECT)
 
 # Database Design.
-- next
+## ERD (Entity Relationship diagram)
+- A Diagram to show the full overview on my system database , it's explains the relationship between entities to be stored in a database, it's like UML diagram or C4 diagram
+- the ERD (ER) Diagram is the structure of the database , It acts as a franework (blueprint) with specialized symbols for the purpose of defining the relationship between the databaase entities.
+- ER diagram is created based on three principal components: (Entities , attricbutes , Relationshhips)
+- A one must consider the good practice and spend lots of time in the planning and designing stage
+
+- Er Modeling (Entity-Relation Modeling) represents the structre of the database with the help pf diagram.
+- ER modeling is a systematic process to degign a database as it would require you to analze all data requiremenets before implementing your database.
+
+
