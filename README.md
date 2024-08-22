@@ -115,4 +115,43 @@
 - Er Modeling (Entity-Relation Modeling) represents the structre of the database with the help pf diagram.
 - ER modeling is a systematic process to degign a database as it would require you to analze all data requiremenets before implementing your database.
 
+## ERD Symbols
+- Entity = rectangle... strong Entity (Entity with primary key)
+ - To identify the Entity , ask your self a question , do i need to store informations for that entity? if yes so it's a entity
+ - The 2 nested 2 rectangles = weak Entity (it has no primary key , prefered not using it)
+- Relation = diamond and lines
 
+- the Ellipses = attribute.
+	- if the attribute has more than 1 type , ie. name (first , mid , last) = composite attribute.
+	- the 2 nested Ellipses = multivalued attribute ( prefered not to say)
+
+
+- the doted Ellipses = derived attribute (some attribute  is optional , i can derive it fomr another data , like age , employees number...etc)
+- the underscore = primary key (key attribute)
+
+
+## Components of ER Diagram
+- ER diagram is based on 3 basic concepts:
+	* Entitis:
+		- Entity (Strong)
+		- Weak
+	* Attributes:
+		- Attribute
+		- Key Attribute
+		- Composite Attribute
+		- Multivalued Attribute
+		- Derived Attribute
+	* Relationships:
+		- one-to-one
+		- one-to-many
+		- many-to-one
+		- many-to-many
+
+
+## Entity vs Weak Enntity
+- An Entity = row or record
+- ex , A student Enrolled in course [student]-------(Enrolled)----->[courses]
+- You can acheive Entity Integrity by having only strong Entities in ur ER diagram
+
+## Attributes
+-next
