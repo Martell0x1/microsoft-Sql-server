@@ -155,3 +155,27 @@
 
 ## Attributes
 -next
+
+## Relationships
+- at first we need to understand how to define a relationship between tow entities , think in the following examples:
+
+    1. you have a university system , define the following relationship [student] -----(?)--->[course]
+        - as you might gussed a student can enroll in an course [student] ----(enrolls in)--->[course]
+    
+    2. [student] ------(?)----->[id card] => [student]-----(has an)---->[id card]
+
+    3. [employee]-------(?)---->[project] => this relation could be formated in more than 1 relation , you should consider drawing all possible relationships between entities , [employee]-----(works on)---->[project] `or` [employee]----(manages)--->[project]
+
+    ### Self Referencing Relationship
+        - some entities could have relations with themselfs such as employee , a manager can manage(employee) can manage other employees , so [employee]-----(manages)---->[employee]
+        - imagine it just like  this table.
+        '
+             |ID |  Name   | Salary | Manager |
+             |---|---------|--------|---------|
+        |--> | 1 | Ahmed   | 5000   | NULL    |
+        |    | 2 | Mohamed | 1300   | 1       |----|
+        |    | 3 | Ali     | 1200   | 2       |    |
+        -------------------------------------------|
+        '
+    ### Relation Types
+    - next
