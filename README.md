@@ -178,4 +178,29 @@
         -------------------------------------------|
         '
     ### Relation Types
-    - next
+    - relationships are being assigned depends on buissenes requiremenets.
+    1. #### One-To-One relationship
+        being written just like this in ERD diagram `[table1]--1--->(relationship)-----1--->[table2]`
+        ex:
+            1. student ----> id
+            2. Student ----> person
+            3. member ---> book (assuming that the buissenes requiremenets obligies me hat only one member can borrow only one book)
+            4. Traveler ----> seat
+            5. Employee ----> Desk
+            6. Employee ----> phone Extention
+            7. Employee -----> Task (said that the buissenes requirements obligies me that for each employee he takes only one task)
+    2. #### One-To-Many / Many-To-One
+        - when a single element of an entity is associated with more than one element of another entity , it's called a ont-to-many relationshipt.
+        - it's being wriiten like this `[table1]---1--->(relation)---M--->[table2]` or vice-verca
+        ex:
+            1. customers --> order `[customer] ---- 1  --->(place) --- m--->[order]`
+            2. order ---> customer `[order] ---- M  --->(ordered by) --- 1--->[customer]`
+            3. Employee --> project `[Employee] ---- M  --->(works on) --- 1--->[project]`
+            4. member ---> book `[member] ---- 1  --->(borrow) --- m--->[book]`
+            5. cutomer ----> mobile line `[customer] --- 1--->(can have) --- m --->[mobile line]`
+
+    3. #### Many-To-Many relationship
+        you might guess it.
+
+## Cardinality Vs Ordinality
+- next
