@@ -203,4 +203,17 @@
         you might guess it.
 
 ## Cardinality Vs Ordinality
-- next
+- 1. Cardinality:
+    - refers to the `Maximum` number of times an instance in one entity can relate to instances of another entity
+    - Cardinality is used to determine the relationships among entites (one-to-one , ont-to-many , many-to-many)
+- 2. Ordinality:
+    - is the `Minimum` number of times an instace in one entity can be associated with an instance in the related entity, in other words it specifies if it's optional or mandatory
+
+    - in ERD systems we can refere to the Cardinality and ordinalty as follwing `(ordinalty,Cardinality)`
+    - ex:
+        `[student]--<0>--(Enrolled)---<0>->[cource]` , in this paper we refer to the ordinalty in <> tags
+            this ERD means that a student could enroll in acource or not so the student entity is optional to the cource entity, 
+            a cource could have students or not so it's optional to the student entity.
+
+        `[customer]----(1,1)---------<Place>--------(0,M)------>[order]` , a customer is required to place an order , but an order doesn't depend on a customer.
+
