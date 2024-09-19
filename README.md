@@ -230,6 +230,49 @@
 - total Participation = mandatory , Partial Participation = optional.
 
 ## Process of Creating ERD.
-- next
+- note that the business requirements should be considered carefully.
+-   1. Entity Identification => `Ask your self if this thing should have a data to be stored in the database?`
+    2. Relationship Identification => `what is the relation between entity A and entity B`
+    3. Cardinality Identification  => `what is the cradinality and ordinalty (min ,max)`
+    4. Identify Attributes.
+    5. Create ERD
+## Erd site
+- this site is pretty good for designing ERD [erdplus](https://erdplus.com/)
 
+## Associative Entities / Aggregation
+- an entity that comes up from connecting a relation with another relation.
+- it's called `junction table` , `linking table` , `cross-reference table`.
+- by using Aggregation / associative-entity , we can represent complex relationships between entities in a structured and efficeint way , without having to duplicate data or create confusing relationships and avoid data redundancy , making it a useful concept om database design.
+- we call it Aggregation becouse when an entity has a relationship with another relationship , a relation with it's corresponding entities is Aggregated into a higher level entity. Aggregation is an abstract through which we can represent relationship as higher level entity set. 
 
+- [see me](https://www.sciencedirect.com/topics/computer-science/associative-entity)
+
+## Generalization.
+- when we have more than one entity that share many attributes , we can make another entity and make thos entities inherite the base entity usnig the `bottom-up approach`
+- it's represented in ERD using this traingle:
+    `
+        |
+      /   \
+     / IS  \
+    /   A   \
+   /---------\
+` , please note that the head must be at top and the base must be at bottom.
+- just remember that Generalization is just like inhertance in OOP
+- ex `from student with name and age related with employee with name and age ==> to person who relates with both student and employee`
+- [see me](https://technogeekscs.com/generalization-in-dbms/)
+
+## Specialization.
+- Specialization is a `top-down approach` in which a higher-level entity is divided into multiple specialized lower-level entities
+- an entity is devided into sub entities with same charactristics.
+- ex: `from employee to developer`, `from employee to teacher`,...etc
+
+- it's represented in ERD using this traingle:
+    `
+    \--------/
+     \  IS  /
+      \  A /
+       \  /
+         |
+`
+
+# Relational Schema.
