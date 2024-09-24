@@ -276,3 +276,9 @@
 `
 
 # Relational Schema.
+- a set of relational tables and associateed items that are related to each other.
+- relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
+
+    ## convert Self Referntial.
+    -next
+
