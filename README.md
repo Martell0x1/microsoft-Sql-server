@@ -280,5 +280,59 @@
 - relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
 
     ## convert Self Referntial.
-    -next
+    - if we though in the employee examble `(employee)------<manages>---->(employee)`
+    - we then design it as follows: in the same table we add a foreign key field to the primary key of the table.
+    - `
+        Employee
+        -----------------
+        PK | EmpID 
+           | Name   
+           | Salary
+        FK | ManagerID
+        ------------------
+    `
+
+    ## convert Composite / MultiValued / Derived Attributes
+    - in composite attribute we take the roots of the tree ex , name-> firstname, lastname , we take firstname and lastname as attributes
+    - in derived attribute we ignore it.
+    - in mutlivalued attributes we make a new entity for it and the public key of the original entity has a foreign key to that table with the same name
+
+    ex:
+        `(student)
+            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))`
+        - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
+        - so this becomes this
+        `
+            Student                             Phone
+            ---------------------               -------------
+            PK  |   StudentId   |----------       Pk | PhoneID
+                |   Firstname   |         |          | Phone
+                |   LastName    |         |-----> FK | StudentID
+            ---------------------               ---------------
+        `
+    ## Convert one-to-one relationship
+    - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
+    - ex:
+        `Employee <-----> Acess-card`
+        - first solution
+            `
+                Employee                AcessCard
+                ---------               -----------
+                PK  | EmployeeID ----   PK  | CardId
+                    | Name          |       | serial num
+                    ...              -> FK  | EmployeeID
+                ------------            ------------------
+            `
+        - second solution (this is prefered)
+            `
+                Employee            AcessCard
+                ------------        ---------
+                PK  | EmpID    ---- PK | cardID
+                    | Name     |       | Serial num
+                FK  | CardID  <-     ----------------
+            `
+    ## Convert One-to-Many relationship.
+
+    - ex:
+        `Employee <<<--(works in)---> Department`
 
