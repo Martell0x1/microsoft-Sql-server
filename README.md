@@ -1,4 +1,15 @@
-# Quick Access
+# 🚀 Quick Access 🚀
+
+---
+
+<p align="center">
+  <img src="https://media.giphy.com/media/QX1BeU3ptA6E5sOsvE/giphy.gif" width="100" alt="Database Animation">
+</p>
+
+Explore the world of Databases! Get started with quick access to all major sections below. ✨
+
+---
+
 - [What is a Database](#whats-a-database)
     - [Types of DBMS](#types-of-dbms)
     - [Why Databases](#why-databases)
@@ -35,6 +46,15 @@
     - [Convert Generalization, Specialization](#convert-generalization-specialization)
     - [Convert Associative Entity](#convert-associative-entity)
     - [Summary](#summary)
+- [SQL](#sql)
+  - [DDL](#ddl)
+    - [CREATE_DATABASE](#create_database)
+    - [CREATE_DATABASE_IF_NOT_EXIST](#create_database_if_not_exist)
+    - [SWITCH_DATABASES](#switch_databases)
+    - [DROP_DATABASES](#drop_databaes)
+    - [DROP_IF_EXISTS](#drop_if_exists)
+    - [CREATE_TABLE](#create_table)
+    - [SQL_DATA_TYPES](#sql_data_types)
 
 # What's A database
 - a database is an organized collection of data so that it can be easily accessed.
