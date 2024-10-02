@@ -408,10 +408,13 @@
     - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
     ### CREATE_DATABASE_IF_NOT_EXIST
     - checks if the databases is not exist if not so it will create it .
-    - syntax `IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name') <br>`
-                     ` BEGIN<br>`
-                        ` CREATE DATABASE db_name;<br>`
-                     `END`
+    - syntax :
+        ```
+        IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name')
+            BEGIN
+                CREATE DATABASE db_name;
+            END
+        ```
 
 
 
