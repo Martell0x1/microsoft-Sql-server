@@ -1,3 +1,43 @@
+Sure! Here's a quick access section for your document:
+
+# Quick Access
+- [What is a Database](#whats-a-database)
+    - [Types of DBMS](#types-of-dbms)
+    - [Why Databases](#why-databases)
+    - [Data vs Information vs Knowledge vs Wisdom](#data-vs-information-vs-knowledge-vs-wisdom)
+- [Database Essentials](#database-essentials)
+    - [What is Null](#what-is-null)
+    - [Primary Key vs Foreign Key](#primary-key-vs-foreign-key)
+    - [Referential Integrity (Data Integrity)](#referential-integrity-data-integrity)
+    - [Cascade Delete](#cascade-delete)
+    - [Data Redundancy (Data Duplications)](#data-redundancy-data-duplicatons)
+    - [Data Integrity](#data-integrity)
+    - [Constraints](#constraints)
+    - [SQL (Structured Query Language)](#sql-structured-query-language)
+- [Database Design](#database-design)
+    - [ERD (Entity Relationship Diagram)](#erd-entity-relationship-diagram)
+    - [ERD Symbols](#erd-symbols)
+    - [Components of ER Diagram](#components-of-er-diagram)
+    - [Entity vs Weak Entity](#entity-vs-weak-entity)
+    - [Attributes](#attributes)
+    - [Relationships](#relationships)
+    - [Cardinality vs Ordinality](#cardinality-vs-ordinality)
+    - [Cardinality Symbols](#cardinality-symbols)
+    - [Total vs Partial Participation (OLD ERD)](#total-vs-partial-participation-old-erd)
+    - [Process of Creating ERD](#process-of-creating-erd)
+    - [Associative Entities / Aggregation](#associative-entities-aggregation)
+    - [Generalization](#generalization)
+    - [Specialization](#specialization)
+- [Relational Schema](#relational-schema)
+    - [Convert Self Referential](#convert-self-referential)
+    - [Convert Composite / MultiValued / Derived Attributes](#convert-composite-multivalued-derived-attributes)
+    - [Convert One-to-One Relationship](#convert-one-to-one-relationship)
+    - [Convert One-to-Many Relationship](#convert-one-to-many-relationship)
+    - [Convert Many-to-Many Relationship](#convert-many-to-many-relationship)
+    - [Convert Generalization, Specialization](#convert-generalization-specialization)
+    - [Convert Associative Entity](#convert-associative-entity)
+    - [Summary](#summary)
+
 # What's A database
 - a database is an organized collection of data so that it can be easily accessed.
 - To manage these databases , Databases Mangment System (DBMS) are used
@@ -335,4 +375,29 @@
 
     - ex:
         `Employee <<<--(works in)---> Department`
+
+    ## convert Many-to-Many relationship
+    - when deailing with many-to-many relationships , you must consider creating the `Bridge Table`, that has the public keys of both other tables as a foreign keys
+    - ![Many-To-Many-Relational-Schema] (https://www3.ntu.edu.sg/home/ehchua/programming/sql/images/ManyToMany.png)
+    - the middle table is called `Bridge table / Bridge Entity`
+
+    - note that in the bridge table the tow foriegn keys must be foriegn keys not primary keys , imagine the system when having a student can enroll in course , so we will end up with 3 tables (student , enrollment , course) , if we take the tow primary keys of the tow other tables and put them as a primary keys in the enrolmment table , an edge case will be ingored which is when a student fails in a course he can retake it , but with using the primary keys this will not be able to be achieved , as the primary key is unqiue.
+
+    ## Covert Generalization , Specialization.
+    - Take the Primary key from parent and put it in the child as a forign key.
+    
+    ## Convert Assocative Entity.
+    - same as converting many-to-many , but here there will be another table related with the associative entity , we will take it's primary key and put it as a foreign key in the Bridge Entity.
+
+    - ![Associative] (https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
+
+    ## Summary
+    - Self-Refrential               One Entity that have a foriegn key that points to thye primary key
+    - Attributes                    ignore the derived attribute , take the childs of the composit attributes , create a new table for the mutlivalued attrivutes.
+    - Generalization , Specailization   Take the Primary key of the parent and put it as a foreign key in the child.
+    - One-To-One                    take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
+    - One-To-many / Many-To-One     take the primary key of one side and put it as a forign key in the many  side.
+    - many-to-many                  Create a Bridge Table , take the primary key of the tow talbes , put them as a foriegn key in the bridge table
+    - Assocative                    same as many-to-many , but now you have to add other tables to the bridge table.
+
 
