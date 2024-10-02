@@ -1,5 +1,3 @@
-Sure! Here's a quick access section for your document:
-
 # Quick Access
 - [What is a Database](#whats-a-database)
     - [Types of DBMS](#types-of-dbms)
@@ -399,5 +397,22 @@ Sure! Here's a quick access section for your document:
     - One-To-many / Many-To-One     take the primary key of one side and put it as a forign key in the many  side.
     - many-to-many                  Create a Bridge Table , take the primary key of the tow talbes , put them as a foriegn key in the bridge table
     - Assocative                    same as many-to-many , but now you have to add other tables to the bridge table.
+
+# SQL
+- in this section we wil put our hands on SQL queires using SQL-Server-Managment-Studio
+- The System-databases in SSMS is used to makes you able to excute commands and some other internal stuff, don't fuck with it.
+    ## DDL
+    - DDL = Data Defineation language.
+        ### CREATE_DATABASE
+            - on the databases section just write click and select new database , give it a name and press ok , this is the GUI way to create it
+            - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
+        ### CREATE_DATABASE_IF_NOT_EXIST
+            - checks if the databases is not exist if not so it will create it .
+            - syntax `IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name') <br>`
+                     ` BEGIN<br>`
+                        ` CREATE DATABASE db_name;<br>`
+                     `END`
+
+
 
 
