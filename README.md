@@ -405,16 +405,53 @@
     - DDL = Data Defineation language.
     ### CREATE_DATABASE
     - on the databases section just write click and select new database , give it a name and press ok , this is the GUI way to create it
-    - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
+        - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
     ### CREATE_DATABASE_IF_NOT_EXIST
     - checks if the databases is not exist if not so it will create it .
-    - syntax :
+        - syntax :
+            ```
+            IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name')
+                BEGIN
+                    CREATE DATABASE db_name;
+                END
+            ```
+
+        - let's walk through every line `SELECT * FROM sys.databases WHERE name = 'db_name'` this will get the information of database named db_name
+        - so if this database doesn't exist , create it.
+        - to get the databases on the system we use `SELECT * FROM sys.databases;`
+
+    ### SWITCH_DATABASES
+    - when we open new_query tab and write soem queries ... on which database it will run?
+        - it will run on the `master` database , which is a built in system database. , you can switch them using the drop-down list.
+        - syntax: `USE db_name;`
+    ### DROP_DATABAES
+    - when we want to delete a database.
+        - syntax: `DROP DATABASE db_name;`
+        - or just write click and delete the database.
+    ### DROP_IF_EXISTS
+    - drop a database if and only if it's exists.
+        - syntax: 
         ```
-        IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name')
-            BEGIN
-                CREATE DATABASE db_name;
-            END
+        IF EXISTS(SELECT * FROM sys.databases WHERE name = 'Martell')
+        begin
+            drop database Martell;
+        end
         ```
+    ### CREATE_TABLE
+    - creating a table in the database
+        - syntax:
+        ```
+        CREATE TABLE Emploees(
+            ID int NOT NULL,
+            Name NVARCHAR(50) NOT NULL,
+            Phone NVARCHAR(10) NULL,
+            Salary SMALLMONEY NULL,
+            primary key (ID)
+        );
+        ```
+    ### SQL_DATA_TYPES
+    - next
+    
 
 
 
