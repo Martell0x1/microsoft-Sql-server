@@ -403,12 +403,12 @@
 - The System-databases in SSMS is used to makes you able to excute commands and some other internal stuff, don't fuck with it.
     ## DDL
     - DDL = Data Defineation language.
-        ### CREATE_DATABASE
-            - on the databases section just write click and select new database , give it a name and press ok , this is the GUI way to create it
-            - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
-        ### CREATE_DATABASE_IF_NOT_EXIST
-            - checks if the databases is not exist if not so it will create it .
-            - syntax `IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name') <br>`
+    ### CREATE_DATABASE
+    - on the databases section just write click and select new database , give it a name and press ok , this is the GUI way to create it
+    - another way is to use the DDL to create it , select "new Query" and type this query `CREATE DATABASE DB_NAME;` , then hit excute button , and write click on the databases and refresh , it will appear.
+    ### CREATE_DATABASE_IF_NOT_EXIST
+    - checks if the databases is not exist if not so it will create it .
+    - syntax `IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'db_name') <br>`
                      ` BEGIN<br>`
                         ` CREATE DATABASE db_name;<br>`
                      `END`
