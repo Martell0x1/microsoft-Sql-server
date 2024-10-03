@@ -2,11 +2,8 @@
 
 ---
 
-<p align="center">
-  <a href="https://giphy.com/gifs/abstract-urban-futuristic-fXyfpPeT5y9iTbagj5">
-    <img src="https://media.giphy.com/media/fXyfpPeT5y9iTbagj5/giphy.gif" width="480" height="480" alt="Abstract Urban Futuristic">
-  </a>
-</p>
+[![Abstract Urban Futuristic](https://media.giphy.com/media/fXyfpPeT5y9iTbagj5/giphy.gif)](https://giphy.com/gifs/abstract-urban-futuristic-fXyfpPeT5y9iTbagj5)
+
 
 
 Explore the world of Databases! Get started with quick access to all major sections below. ✨
