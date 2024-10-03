@@ -3,7 +3,7 @@
 ---
 
 <p align="center">
-  <img src="https://media.giphy.com/media/QX1BeU3ptA6E5sOsvE/giphy.gif" width="100" alt="Database Animation">
+  <img src="https://giphy.com/gifs/abstract-urban-futuristic-fXyfpPeT5y9iTbagj5/pic.gif" width="500" alt="Database Animation">
 </p>
 
 Explore the world of Databases! Get started with quick access to all major sections below. ✨
