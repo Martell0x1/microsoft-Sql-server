@@ -3,8 +3,11 @@
 ---
 
 <p align="center">
-    <iframe src="https://giphy.com/embed/fXyfpPeT5y9iTbagj5" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/abstract-urban-futuristic-fXyfpPeT5y9iTbagj5">via GIPHY</a></p>
+  <a href="https://giphy.com/gifs/abstract-urban-futuristic-fXyfpPeT5y9iTbagj5">
+    <img src="https://media.giphy.com/media/fXyfpPeT5y9iTbagj5/giphy.gif" width="480" height="480" alt="Abstract Urban Futuristic">
+  </a>
 </p>
+
 
 Explore the world of Databases! Get started with quick access to all major sections below. ✨
 
