@@ -2,7 +2,7 @@
 
 ---
 
-![Alt Text](https://www.freepik.com/premium-ai-image/3d-flat-icon-as-data-summary-icon-with-copy-space-white-background-concept-as-vector-illustrati_272732306.htm#query=microsoft%20sql%20server&position=20&from_view=keyword&track=ais_hybrid&uuid=c3c7463e-58c7-46ac-87fc-19a78a185b35)
+![Alt Text](https://www.bleepstatic.com/content/hl-images/2022/05/18/MSSQL.jpg)
 
 
 
