@@ -224,33 +224,37 @@ Explore the world of Databases! Get started with quick access to all major secti
 - You can acheive Entity Integrity by having only strong Entities in ur ER diagram
 
 ## Attributes
--next
+- attribues is represented in ERD like this:
+![attributes](https://images.edrawsoft.com/articles/er-diagram-symbols/chens-notation-1.png)
 
 ## Relationships
 - at first we need to understand how to define a relationship between tow entities , think in the following examples:
 
-    1. you have a university system , define the following relationship [student] -----(?)--->[course]
-        - as you might gussed a student can enroll in an course [student] ----(enrolls in)--->[course]
+    1. you have a university system , define the following relationship `[student] -----(?)--->[course]`
+        - as you might gussed a student can enroll in an course `[student] ----(enrolls in)--->[course]`
     
-    2. [student] ------(?)----->[id card] => [student]-----(has an)---->[id card]
+    2. `[student] ------(?)----->[id card] `=> `[student]-----(has an)---->[id card]`
 
-    3. [employee]-------(?)---->[project] => this relation could be formated in more than 1 relation , you should consider drawing all possible relationships between entities , [employee]-----(works on)---->[project] `or` [employee]----(manages)--->[project]
+    3. `[employee]-------(?)---->[project]` => this relation could be formated in more than 1 relation , you should consider drawing all possible relationships between entities , `[employee]-----(works on)---->[project] `or` [employee]----(manages)--->[project]`
+    ![relationships](https://www.simplilearn.com/ice9/free_resources_article_thumb/ERDiagramsInDBMS_1.png)
 
     ### Self Referencing Relationship
         - some entities could have relations with themselfs such as employee , a manager can manage(employee) can manage other employees , so [employee]-----(manages)---->[employee]
         - imagine it just like  this table.
-        '
+        ```
              |ID |  Name   | Salary | Manager |
              |---|---------|--------|---------|
         |--> | 1 | Ahmed   | 5000   | NULL    |
         |    | 2 | Mohamed | 1300   | 1       |----|
         |    | 3 | Ali     | 1200   | 2       |    |
         -------------------------------------------|
-        '
+        ```
+    ![self](https://docs.joomla.org/images/7/78/Self_referencing.jpg)
     ### Relation Types
     - relationships are being assigned depends on buissenes requiremenets.
     1. #### One-To-One relationship
         being written just like this in ERD diagram `[table1]--1--->(relationship)-----1--->[table2]`
+        ![one-to-one](https://cdn1.byjus.com/wp-content/uploads/2022/05/word-image183.png)
         ex:
             1. student ----> id
             2. Student ----> person
@@ -262,6 +266,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     2. #### One-To-Many / Many-To-One
         - when a single element of an entity is associated with more than one element of another entity , it's called a ont-to-many relationshipt.
         - it's being wriiten like this `[table1]---1--->(relation)---M--->[table2]` or vice-verca
+        ![one-to-many](https://i.sstatic.net/thblX.jpg)
         ex:
             1. customers --> order `[customer] ---- 1  --->(place) --- m--->[order]`
             2. order ---> customer `[order] ---- M  --->(ordered by) --- 1--->[customer]`
@@ -271,6 +276,7 @@ Explore the world of Databases! Get started with quick access to all major secti
 
     3. #### Many-To-Many relationship
         you might guess it.
+        ![many-to-many](https://i.sstatic.net/UnRme.png)
 
 ## Cardinality Vs Ordinality
 - 1. Cardinality:
@@ -290,10 +296,9 @@ Explore the world of Databases! Get started with quick access to all major secti
 ## Cardinality Symbols
 - crow-s-foot-notation.
     [see this](https://vertabelo.com/blog/crow-s-foot-notation/)
+    ![Symboles](https://discourse.omnigroup.com/uploads/default/original/2X/5/54b713a5fe9dc79b458b8afe1a5a148320ba132d.gif)
 - min-max-notation.
-    [see this]()
 - bachman-notaion.
-    [see this]()
 
 ## Total Vs Partial Participation (OLD ERD)
 - review ur course.
@@ -372,35 +377,35 @@ Explore the world of Databases! Get started with quick access to all major secti
             (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))`
         - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
         - so this becomes this
-        `
+        ```
             Student                             Phone
             ---------------------               -------------
             PK  |   StudentId   |----------       Pk | PhoneID
                 |   Firstname   |         |          | Phone
                 |   LastName    |         |-----> FK | StudentID
             ---------------------               ---------------
-        `
+        ```
     ## Convert one-to-one relationship
     - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
     - ex:
         `Employee <-----> Acess-card`
         - first solution
-            `
+            ```
                 Employee                AcessCard
                 ---------               -----------
                 PK  | EmployeeID ----   PK  | CardId
                     | Name          |       | serial num
                     ...              -> FK  | EmployeeID
                 ------------            ------------------
-            `
+            ```
         - second solution (this is prefered)
-            `
+            ```
                 Employee            AcessCard
                 ------------        ---------
                 PK  | EmpID    ---- PK | cardID
                     | Name     |       | Serial num
                 FK  | CardID  <-     ----------------
-            `
+            ```
     ## Convert One-to-Many relationship.
 
     - ex:
@@ -408,7 +413,7 @@ Explore the world of Databases! Get started with quick access to all major secti
 
     ## convert Many-to-Many relationship
     - when deailing with many-to-many relationships , you must consider creating the `Bridge Table`, that has the public keys of both other tables as a foreign keys
-    - ![Many-To-Many-Relational-Schema] (https://www3.ntu.edu.sg/home/ehchua/programming/sql/images/ManyToMany.png)
+    ![Many-To-Many-Relational-Schema](https://miro.medium.com/v2/resize:fit:1400/1*e5ifCgUhYJmgdl0PKEam8g.png)
     - the middle table is called `Bridge table / Bridge Entity`
 
     - note that in the bridge table the tow foriegn keys must be foriegn keys not primary keys , imagine the system when having a student can enroll in course , so we will end up with 3 tables (student , enrollment , course) , if we take the tow primary keys of the tow other tables and put them as a primary keys in the enrolmment table , an edge case will be ingored which is when a student fails in a course he can retake it , but with using the primary keys this will not be able to be achieved , as the primary key is unqiue.
@@ -419,7 +424,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     ## Convert Assocative Entity.
     - same as converting many-to-many , but here there will be another table related with the associative entity , we will take it's primary key and put it as a foreign key in the Bridge Entity.
 
-    - ![Associative] (https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
+    ![Associative](https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
 
     ## Summary
     - Self-Refrential               One Entity that have a foriegn key that points to thye primary key
