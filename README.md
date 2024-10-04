@@ -2,7 +2,7 @@
 
 ---
 
-![Alt Text](https://giphy.com/gifs/internet-jim-carrey-working-bAplZhiLAsNnG/giphy.gif)
+![Alt Text](https://www.bleepstatic.com/content/hl-images/2022/05/18/MSSQL.jpg)
 
 
 
@@ -224,33 +224,37 @@ Explore the world of Databases! Get started with quick access to all major secti
 - You can acheive Entity Integrity by having only strong Entities in ur ER diagram
 
 ## Attributes
--next
+- attribues is represented in ERD like this:
+![attributes](https://images.edrawsoft.com/articles/er-diagram-symbols/chens-notation-1.png)
 
 ## Relationships
 - at first we need to understand how to define a relationship between tow entities , think in the following examples:
 
-    1. you have a university system , define the following relationship [student] -----(?)--->[course]
-        - as you might gussed a student can enroll in an course [student] ----(enrolls in)--->[course]
+    1. you have a university system , define the following relationship `[student] -----(?)--->[course]`
+        - as you might gussed a student can enroll in an course `[student] ----(enrolls in)--->[course]`
     
-    2. [student] ------(?)----->[id card] => [student]-----(has an)---->[id card]
+    2. `[student] ------(?)----->[id card] `=> `[student]-----(has an)---->[id card]`
 
-    3. [employee]-------(?)---->[project] => this relation could be formated in more than 1 relation , you should consider drawing all possible relationships between entities , [employee]-----(works on)---->[project] `or` [employee]----(manages)--->[project]
+    3. `[employee]-------(?)---->[project]` => this relation could be formated in more than 1 relation , you should consider drawing all possible relationships between entities , `[employee]-----(works on)---->[project] `or` [employee]----(manages)--->[project]`
+    ![relationships](https://www.simplilearn.com/ice9/free_resources_article_thumb/ERDiagramsInDBMS_1.png)
 
     ### Self Referencing Relationship
         - some entities could have relations with themselfs such as employee , a manager can manage(employee) can manage other employees , so [employee]-----(manages)---->[employee]
         - imagine it just like  this table.
-        '
+        ```
              |ID |  Name   | Salary | Manager |
              |---|---------|--------|---------|
         |--> | 1 | Ahmed   | 5000   | NULL    |
         |    | 2 | Mohamed | 1300   | 1       |----|
         |    | 3 | Ali     | 1200   | 2       |    |
         -------------------------------------------|
-        '
+        ```
+    ![self](https://docs.joomla.org/images/7/78/Self_referencing.jpg)
     ### Relation Types
     - relationships are being assigned depends on buissenes requiremenets.
     1. #### One-To-One relationship
         being written just like this in ERD diagram `[table1]--1--->(relationship)-----1--->[table2]`
+        ![one-to-one](https://cdn1.byjus.com/wp-content/uploads/2022/05/word-image183.png)
         ex:
             1. student ----> id
             2. Student ----> person
@@ -262,6 +266,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     2. #### One-To-Many / Many-To-One
         - when a single element of an entity is associated with more than one element of another entity , it's called a ont-to-many relationshipt.
         - it's being wriiten like this `[table1]---1--->(relation)---M--->[table2]` or vice-verca
+        ![one-to-many](https://i.sstatic.net/thblX.jpg)
         ex:
             1. customers --> order `[customer] ---- 1  --->(place) --- m--->[order]`
             2. order ---> customer `[order] ---- M  --->(ordered by) --- 1--->[customer]`
@@ -271,6 +276,7 @@ Explore the world of Databases! Get started with quick access to all major secti
 
     3. #### Many-To-Many relationship
         you might guess it.
+        ![many-to-many](https://i.sstatic.net/UnRme.png)
 
 ## Cardinality Vs Ordinality
 - 1. Cardinality:
@@ -290,10 +296,9 @@ Explore the world of Databases! Get started with quick access to all major secti
 ## Cardinality Symbols
 - crow-s-foot-notation.
     [see this](https://vertabelo.com/blog/crow-s-foot-notation/)
+    ![Symboles](https://discourse.omnigroup.com/uploads/default/original/2X/5/54b713a5fe9dc79b458b8afe1a5a148320ba132d.gif)
 - min-max-notation.
-    [see this]()
 - bachman-notaion.
-    [see this]()
 
 ## Total Vs Partial Participation (OLD ERD)
 - review ur course.
@@ -320,16 +325,18 @@ Explore the world of Databases! Get started with quick access to all major secti
 ## Generalization.
 - when we have more than one entity that share many attributes , we can make another entity and make thos entities inherite the base entity usnig the `bottom-up approach`
 - it's represented in ERD using this traingle:
-    `
+    ```
         |
       /   \
      / IS  \
     /   A   \
    /---------\
-` , please note that the head must be at top and the base must be at bottom.
+   ```
+- please note that the head must be at top and the base must be at bottom.
 - just remember that Generalization is just like inhertance in OOP
 - ex `from student with name and age related with employee with name and age ==> to person who relates with both student and employee`
 - [see me](https://technogeekscs.com/generalization-in-dbms/)
+![Generalization](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMYfBruM6p99MIbjYlaPILZk2fKT_FHTT6dpn-FRER3s0DZ3ua6kv5SDsY-0sKWjs74qeM0yrWnClPRbrShUg-fC4DlfbFtXbYsk6kv2Y7anw4puGAMizWyFukAYMGw1bBq_rAiB5sj4yTIlKqrUgFFF3p9t6qETWSDbaT_k6Yyii4_IWvd3K4Be-I/s811/DBMS.png)
 
 ## Specialization.
 - Specialization is a `top-down approach` in which a higher-level entity is divided into multiple specialized lower-level entities
@@ -337,14 +344,16 @@ Explore the world of Databases! Get started with quick access to all major secti
 - ex: `from employee to developer`, `from employee to teacher`,...etc
 
 - it's represented in ERD using this traingle:
-    `
+    ```
     \--------/
      \  IS  /
       \  A /
        \  /
          |
-`
-
+         |
+    ```
+![Spec](https://media.geeksforgeeks.org/wp-content/uploads/20200422233542/Specialisation_1.jpg)
+- [see me](https://www.geeksforgeeks.org/generalization-specialization-and-aggregation-in-er-model/)
 # Relational Schema.
 - a set of relational tables and associateed items that are related to each other.
 - relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
@@ -352,7 +361,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     ## convert Self Referntial.
     - if we though in the employee examble `(employee)------<manages>---->(employee)`
     - we then design it as follows: in the same table we add a foreign key field to the primary key of the table.
-    - `
+    ```
         Employee
         -----------------
         PK | EmpID 
@@ -360,7 +369,7 @@ Explore the world of Databases! Get started with quick access to all major secti
            | Salary
         FK | ManagerID
         ------------------
-    `
+     ```
 
     ## convert Composite / MultiValued / Derived Attributes
     - in composite attribute we take the roots of the tree ex , name-> firstname, lastname , we take firstname and lastname as attributes
@@ -368,39 +377,43 @@ Explore the world of Databases! Get started with quick access to all major secti
     - in mutlivalued attributes we make a new entity for it and the public key of the original entity has a foreign key to that table with the same name
 
     ex:
-        `(student)
-            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))`
+        ```
+        (student)
+            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))
+        ```
         - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
-        - so this becomes this
-        `
-            Student                             Phone
-            ---------------------               -------------
-            PK  |   StudentId   |----------       Pk | PhoneID
-                |   Firstname   |         |          | Phone
-                |   LastName    |         |-----> FK | StudentID
-            ---------------------               ---------------
-        `
+        - so this becomes this:
+            ```
+
+                Student                             Phone
+                ---------------------               -------------
+                PK  |   StudentId   |----------       Pk | PhoneID
+                    |   Firstname   |         |          | Phone
+                    |   LastName    |         |-----> FK | StudentID
+                ---------------------               ---------------
+                
+            ```
     ## Convert one-to-one relationship
     - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
     - ex:
         `Employee <-----> Acess-card`
         - first solution
-            `
+            ```
                 Employee                AcessCard
                 ---------               -----------
                 PK  | EmployeeID ----   PK  | CardId
                     | Name          |       | serial num
                     ...              -> FK  | EmployeeID
                 ------------            ------------------
-            `
+            ```
         - second solution (this is prefered)
-            `
+            ```
                 Employee            AcessCard
                 ------------        ---------
                 PK  | EmpID    ---- PK | cardID
                     | Name     |       | Serial num
                 FK  | CardID  <-     ----------------
-            `
+            ```
     ## Convert One-to-Many relationship.
 
     - ex:
@@ -408,7 +421,7 @@ Explore the world of Databases! Get started with quick access to all major secti
 
     ## convert Many-to-Many relationship
     - when deailing with many-to-many relationships , you must consider creating the `Bridge Table`, that has the public keys of both other tables as a foreign keys
-    - ![Many-To-Many-Relational-Schema] (https://www3.ntu.edu.sg/home/ehchua/programming/sql/images/ManyToMany.png)
+    ![Many-To-Many-Relational-Schema](https://miro.medium.com/v2/resize:fit:1400/1*e5ifCgUhYJmgdl0PKEam8g.png)
     - the middle table is called `Bridge table / Bridge Entity`
 
     - note that in the bridge table the tow foriegn keys must be foriegn keys not primary keys , imagine the system when having a student can enroll in course , so we will end up with 3 tables (student , enrollment , course) , if we take the tow primary keys of the tow other tables and put them as a primary keys in the enrolmment table , an edge case will be ingored which is when a student fails in a course he can retake it , but with using the primary keys this will not be able to be achieved , as the primary key is unqiue.
@@ -419,7 +432,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     ## Convert Assocative Entity.
     - same as converting many-to-many , but here there will be another table related with the associative entity , we will take it's primary key and put it as a foreign key in the Bridge Entity.
 
-    - ![Associative] (https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
+    ![Associative](https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
 
     ## Summary
     - Self-Refrential               One Entity that have a foriegn key that points to thye primary key
