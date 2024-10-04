@@ -2,7 +2,7 @@
 
 ---
 
-![Alt Text](https://giphy.com/gifs/internet-jim-carrey-working-bAplZhiLAsNnG/giphy.gif)
+![Alt Text](https://www.freepik.com/premium-ai-image/3d-flat-icon-as-data-summary-icon-with-copy-space-white-background-concept-as-vector-illustrati_272732306.htm#query=microsoft%20sql%20server&position=20&from_view=keyword&track=ais_hybrid&uuid=c3c7463e-58c7-46ac-87fc-19a78a185b35)
 
 
 
@@ -325,16 +325,18 @@ Explore the world of Databases! Get started with quick access to all major secti
 ## Generalization.
 - when we have more than one entity that share many attributes , we can make another entity and make thos entities inherite the base entity usnig the `bottom-up approach`
 - it's represented in ERD using this traingle:
-    `
+    ```
         |
       /   \
      / IS  \
     /   A   \
    /---------\
-` , please note that the head must be at top and the base must be at bottom.
+   ```
+- please note that the head must be at top and the base must be at bottom.
 - just remember that Generalization is just like inhertance in OOP
 - ex `from student with name and age related with employee with name and age ==> to person who relates with both student and employee`
 - [see me](https://technogeekscs.com/generalization-in-dbms/)
+![Generalization](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMYfBruM6p99MIbjYlaPILZk2fKT_FHTT6dpn-FRER3s0DZ3ua6kv5SDsY-0sKWjs74qeM0yrWnClPRbrShUg-fC4DlfbFtXbYsk6kv2Y7anw4puGAMizWyFukAYMGw1bBq_rAiB5sj4yTIlKqrUgFFF3p9t6qETWSDbaT_k6Yyii4_IWvd3K4Be-I/s811/DBMS.png)
 
 ## Specialization.
 - Specialization is a `top-down approach` in which a higher-level entity is divided into multiple specialized lower-level entities
@@ -342,14 +344,16 @@ Explore the world of Databases! Get started with quick access to all major secti
 - ex: `from employee to developer`, `from employee to teacher`,...etc
 
 - it's represented in ERD using this traingle:
-    `
+    ```
     \--------/
      \  IS  /
       \  A /
        \  /
          |
-`
-
+         |
+    ```
+![Spec](https://media.geeksforgeeks.org/wp-content/uploads/20200422233542/Specialisation_1.jpg)
+- [see me](https://www.geeksforgeeks.org/generalization-specialization-and-aggregation-in-er-model/)
 # Relational Schema.
 - a set of relational tables and associateed items that are related to each other.
 - relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
@@ -357,7 +361,7 @@ Explore the world of Databases! Get started with quick access to all major secti
     ## convert Self Referntial.
     - if we though in the employee examble `(employee)------<manages>---->(employee)`
     - we then design it as follows: in the same table we add a foreign key field to the primary key of the table.
-    - `
+    ```
         Employee
         -----------------
         PK | EmpID 
@@ -365,7 +369,7 @@ Explore the world of Databases! Get started with quick access to all major secti
            | Salary
         FK | ManagerID
         ------------------
-    `
+     ```
 
     ## convert Composite / MultiValued / Derived Attributes
     - in composite attribute we take the roots of the tree ex , name-> firstname, lastname , we take firstname and lastname as attributes
@@ -373,18 +377,22 @@ Explore the world of Databases! Get started with quick access to all major secti
     - in mutlivalued attributes we make a new entity for it and the public key of the original entity has a foreign key to that table with the same name
 
     ex:
-        `(student)
-            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))`
+        ```
+        (student)
+            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))
+        ```
         - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
-        - so this becomes this
-        ```
-            Student                             Phone
-            ---------------------               -------------
-            PK  |   StudentId   |----------       Pk | PhoneID
-                |   Firstname   |         |          | Phone
-                |   LastName    |         |-----> FK | StudentID
-            ---------------------               ---------------
-        ```
+        - so this becomes this:
+            ```
+
+                Student                             Phone
+                ---------------------               -------------
+                PK  |   StudentId   |----------       Pk | PhoneID
+                    |   Firstname   |         |          | Phone
+                    |   LastName    |         |-----> FK | StudentID
+                ---------------------               ---------------
+                
+            ```
     ## Convert one-to-one relationship
     - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
     - ex:
