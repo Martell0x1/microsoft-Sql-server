@@ -49,13 +49,24 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [Summary](#summary)
 - [SQL](#sql)
   - [DDL](#ddl)
-    - [CREATE_DATABASE](#create_database)
+    - [Create Database](#create_database)
     - [CREATE_DATABASE_IF_NOT_EXIST](#create_database_if_not_exist)
     - [SWITCH_DATABASES](#switch_databases)
     - [DROP_DATABASES](#drop_databaes)
     - [DROP_IF_EXISTS](#drop_if_exists)
     - [CREATE_TABLE](#create_table)
     - [SQL_DATA_TYPES](#sql_data_types)
+    - [Table Alterations](#table-alterations)
+        - [Drop Table](#drop_table)
+        - [Add Column](#add_column)
+        - [Rename Column](#rename_column)
+        - [Rename Table](#rename_table)
+        - [Modify Column](#modify_column)
+        - [Delete Column](#delete_column)
+- [Database Backup and Restore](#backup_database)
+    - [Full Backup](#full_backup)
+    - [Differential Backup](#differential_backup)
+    - [Restore Database](#restore_database)
 
 # What's A database
 - a database is an organized collection of data so that it can be easily accessed.
@@ -471,8 +482,111 @@ Explore the world of Databases! Get started with quick access to all major secti
         );
         ```
     ### SQL_DATA_TYPES
-    - next
-    
+    - in SQL server there are 7 categories of data types
+        - Exact Numberics:
+            - store exact numbers such as integers , decimal...
+            - the int , bigint , smallint , tinyint stores integer values
+            - the money , smallmoney stores currency values
+            - the decimal and numeric stores numbers that have foxed percision and scale
+            - the bit stores 0,1, NULL
+        - ![seeme](https://media.geeksforgeeks.org/wp-content/uploads/SQL_Datatypes_2.png)
+        - Aproximate Numeric data types
+            - stores floating point numeric data , used in scientifc calculations
+            - float , real
+        - Character Strings data types
+            - allow you to store either fixed-length (char) or variable-length (varchar) , in non-unicode (english only)
+            - char , varchar , varchar(max), text
+        - Unicode charachter string data types
+            - allow you to store either fixed-length (char) or variable-length (varchar) , with unicode (english and all other language)
+            - nchar , nvarchar , ntext
+        - Date and Time:
+            - Stores data about date and time.
+            - datetime , smalldatetime , date , time , datetimeoffset , datetime2
+        
+        .... and other , google them.
+    ### Drop_Table
+    - delete tables
+        - syntax: `DROP TABLE table_name;`
+    ### table-alternation
+    - this section is a part of DDL , is used to alternating columns and databasess.
+        #### Add_column
+        -  adding a new column with Alter_table
+            - syntax :
+                ```
+                    ALTER TABLE table_name
+                        ADD Gender data_type(size);    
+                ```
+        #### Rename_Column
+        - renaming a column with alter table
+            - syntax :
+                - this syntax is used globaly in most of RDBMS , but ms-sql-server doesn't accept it
+                ```
+                    ALTER TABLE table_name
+                        RENAME COLUMN old_name  to new_name
+                ```
+            - ms-sql-server syntax:
+                ```
+                    exec sp_rename `table.old_name` , `new_name` , 'COLUMN';
+                ```
+            - this is a stored prosedure in ms-sql-server , which is like a built in function that takes 3 parameters as you can see in the snippet.
+        #### Rename_Table
+        - renaming a table using a stored procedure and alter table.
+            - syntax:
+                - in most RDBMS
+                    ```
+                        ALTER TABLE table_name
+                            RENAME to new_table_name;
+                    ```
+                - sql-server syntax:
+                    ```
+                        exec sp_rename 'table_name_old' , 'table_name_new';
+                    ```
+        #### Modify_Column
+        - modifying the data type and constrains (nullability) , this statmen varies from RDBMS to another
+            - syntax:
+                - in SQLserver & postgreSQL:
+                    ```
+                        ALTER TABLE table_name
+                            ALTER COLUMN col_nam new_datatype(size) nulll/notnull ; -- note that if you didn't specify the nullability it will be null by default
+                    ```
+                - in MySql & Oracle:
+                    ```
+                        ALTER TABLE table_name
+                            MODIFY COLUMN col_name data_type(size);
+                    ```
+        #### Delete_Column
+        - deleting a column in a table, using Alter_table
+            - syntax:
+                ```
+                    ALTER TABLE table_name
+                        DROP COLUMN col_name;
+                ```
+
+    ## Backup_Database
+    - Backing-up database and full Backup
+    - remember to backup your database in different location as if the server dies , the backup doesn't die.
+        ### Full_BackUp
+            - fully backing-up your database
+            - full backup is expensive in time and space.
+                - syntax:
+                    ```
+                        BACKUP DATABASE db_name
+                            TO DISK = 'path';
+                    ```
+        ### Differential_BackUp
+            - backing up the changes between the last backup and the current database.
+                - syntax:
+                    ```
+                        BACKUP DATABSE DB1
+                            TO DISK = `PATH` WITH DIFFERNTAIL;
+                    ```
+        ### Restore_Database
+            - restoring a database from a backup.
+                - syntax:
+                    ```
+                        restore database db_name
+                            from disk = 'path';
+                    ```
 
 
 
