@@ -600,7 +600,124 @@ Explore the world of Databases! Get started with quick access to all major secti
                         restore database db_name
                             from disk = 'path';
                     ```
+    ## DML (Data Manipulation Language)
+    - this section will discuess DML
+        ## INSERT_INTO
+        - inserting into columns;
+            - syntax:
+                ```
+                    INSERT INTO table_name
+                    VALUES 
+                        (VAL1,VAL2,VALE,.....,VALN);
+                ```
+                - this line will insert one record in the table , where val1,val2,....,valn is the values of each column in the table
+                = we can insert multiple values at a time
+                ```
+                    INSERT INTO table_name
+                    VALUES 
+                        (VAL1,VAL2,VALE,.....,VALN),
+                        (VAL21,VAL22,VALE,.....,VALN),
+                        (VAL31,VAL32,VALE,.....,VALN)
+                ```
+                - please notice that the primary key must be unique and must not be null , if you inserted another column with the same Prmimary key
+                 an error occures:
+                    ```
+                        Violation of PRIMARY KEY constraint 'PK__EMP__3214EC27C8A93E8D'. Cannot insert duplicate key in object 'dbo.table_name'. The duplicate key value is (doblicate_primarykey).
+                    ```
+                - and for null
+                    ```
+                        Cannot insert the value NULL into column 'col_name', table 'DB1.dbo.employees'; column does not allow nulls. INSERT fails.
+                    ```
+            - you can also specify the columns you want to insert data in
+                - ex:
+                ```
+                    insert into employees(ID,Salary)
+                    values
+                        (415,20)
+                ```
+                - this will insert the values in only Id,Salary columns , be aware of the nullability of columns as if there's another column which doesn't accept 
+                null it will expect an error (null error);
+        ## UPDATE_WHERE
+        - updating a record according to a condition
+            - syntax:
+                ```
+                update table_name
+                set attribute_name = new_value where (condition(s))
+                ```
+            - ex:
+                ```
+                    update emp
+                        set Name = 'Marwan' Where ID = 4;
 
+                    update emp
+                        set Name = 'Mohamed' where ID = 7;
+
+                    update emp
+                        set Salary = Salary + 100 where Salary < 6000;
+                ```
+            - please note if you forgot the `where` condition in this case the condition is true for all records in the database , so all records will be affected
+
+        ## DELETE_WHERE
+        - deleting a record according to a condition
+            - syntax:
+                ```
+                    delete from table_name
+                    where (condition)
+                ```
+            - ex:
+                ```
+                    delete from emp
+                    where Salary is null;
+
+                    delete from emp
+                    where ID=4;
+                ```
+            - please not if you forgot the `where` condition in this case the condition is true for all records in the database , so all records will be affected
+            and it will be deleted , so be aware.
+        
+        ## SELECT_INTO_FROM
+        - copying the table's data into another table , if i doesn't exist(the new table)
+            - syntax:
+                ```
+                    select * into new_table from old_table where (condition)
+                ```
+            - ex:
+                ```
+                    select * into empCOpy
+                    from emp;
+                ```
+                - this will copy all the data from emp to empCopy table with all it's data.
+                
+                ```
+                    select ID into empCopy
+                    from emp;
+                ```
+
+                - this will copy only the ID column to the new table
+
+                ```
+                    select * into empCopy
+                    from emp where 1=0;
+                ```
+                - this will copy the schema (the skeleton) of the table to the new table.
+                - notice that the where condition in the last ex is false so it will not copy all the data , but it will copy only the schema
+                - select into , creates the new_table but if it's already exist it will error , if we want to copy the data to a table it already exist we use
+                [INSERT_INTO_SELECT_FROM Statment](#insert_into_select_from)
+        
+        ## INSERT_INTO_SELECT_FROM
+        - copying the table's data into an exist table.
+            - syntax:
+                ```
+                    insert into new_table
+                    select Col from old_table;
+                ```
+            - ex:
+                ```
+                    insert into person
+                    select * from old_person where age >=30;
+                ```
+                - this will inserting all the records from old_person table into the person table which it's age is >=30
+        - to use this statment the existing table's columns must matches the old_table's columns.
 
 
 
