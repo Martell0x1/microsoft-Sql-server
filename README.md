@@ -611,7 +611,7 @@ Explore the world of Databases! Get started with quick access to all major secti
                     ```
     ## DML (Data Manipulation Language)
     - this section will discuess DML
-        ## INSERT_INTO
+        ### INSERT_INTO
         - inserting into columns;
             - syntax:
                 ```
@@ -646,7 +646,7 @@ Explore the world of Databases! Get started with quick access to all major secti
                 ```
                 - this will insert the values in only Id,Salary columns , be aware of the nullability of columns as if there's another column which doesn't accept 
                 null it will expect an error (null error);
-        ## UPDATE_WHERE
+        ### UPDATE_WHERE
         - updating a record according to a condition
             - syntax:
                 ```
@@ -666,7 +666,7 @@ Explore the world of Databases! Get started with quick access to all major secti
                 ```
             - please note if you forgot the `where` condition in this case the condition is true for all records in the database , so all records will be affected
 
-        ## DELETE_WHERE
+        ### DELETE_WHERE
         - deleting a record according to a condition
             - syntax:
                 ```
@@ -684,7 +684,7 @@ Explore the world of Databases! Get started with quick access to all major secti
             - please not if you forgot the `where` condition in this case the condition is true for all records in the database , so all records will be affected
             and it will be deleted , so be aware.
         
-        ## SELECT_INTO_FROM
+        ### SELECT_INTO_FROM
         - copying the table's data into another table , if i doesn't exist(the new table)
             - syntax:
                 ```
@@ -713,7 +713,7 @@ Explore the world of Databases! Get started with quick access to all major secti
                 - select into , creates the new_table but if it's already exist it will error , if we want to copy the data to a table it already exist we use
                 [INSERT_INTO_SELECT_FROM Statment](#insert_into_select_from)
         
-        ## INSERT_INTO_SELECT_FROM
+        ### INSERT_INTO_SELECT_FROM
         - copying the table's data into an exist table.
             - syntax:
                 ```
@@ -728,7 +728,7 @@ Explore the world of Databases! Get started with quick access to all major secti
                 - this will inserting all the records from old_person table into the person table which it's age is >=30
         - to use this statment the existing table's columns must matches the old_table's columns.
 
-        ## Auto_Increament.
+        ### Auto_Increament.
         - in most of systems the primary key is set to be auto-incremented , in this section we will know how...
             - syntax:
                 ```
@@ -753,7 +753,7 @@ Explore the world of Databases! Get started with quick access to all major secti
             - please not if you insert the id column with insert into statment you will face this error `IDENTITY_INSERT is ON`
             - to know the last id inserted in the table , you shall use this statment `print @@identity;` this is T-SQL will be discuesed later on.
 
-        ## Delete_VS_Truncate
+        ### Delete_VS_Truncate
         - when deleting from a table it will delete the data from the table with a specific condition `where` and it will not reset the increment .
         - while in the truncate statment it will delete the data from the table with out condition `not where` and it will reset the increment.
             - syntax:
@@ -761,6 +761,72 @@ Explore the world of Databases! Get started with quick access to all major secti
                     truncate table tbl_name;
                 ``` 
             - if you excuted this statment `print @@identity` it will be 0;
+        
+        ### ForeignKey_constraint
+        - in this section we will know how to connect tow tables with foreignkey-primarykey theory.
+        - syntax:
+            ```
+                create table customers(
+                    id int identity(1,1) not null,
+                    first_name nvarchar(50),
+                    last_name nvarchar(50),
+                    age int,
+                    country varchar(40),
+                    primary key(id)
+                );
+
+                create table orders(
+                    ordier_id int identity(1,1) not null,
+                    item varchar(40),
+                    amount int,
+                    customer_id int references customers(id),
+                    primary key(ordier_id)
+                );
+            ```
+            - in that exable we linked the orders table with constomers using the syntax `customer_id int REFERNCES customers(id)` , in more abstraction way
+            - we can use the following syntax as a general solution `id2 datatype references tables's_name(column)`
+            - note that the foreign key constraint protects us against Referntial errors and satisfies the data integreity , as if you wished to delete the customer table
+            you will not be able to do so , it's a violation of referential integreity constraint , as there's a table in our system debends on that table you want
+            to remove , instead you should delete the order table first that's you're garantee that there's no tables in the system debends on customers.
+
+            - you can also create a relation within existing tables using `alter` statment
+            ```
+                use DB1;
+
+                create table customers(
+                    id int identity(1,1) not null,
+                    first_name nvarchar(50),
+                    last_name nvarchar(50),
+                    age int,
+                    country varchar(40),
+                    primary key(id)
+                );
+
+                create table orders(
+                    ordier_id int identity(1,1) not null,
+                    item varchar(40),
+                    amount int,
+                    customer_id int,
+                    primary key(ordier_id)
+                );
+
+                alter table orders
+                add foreign key (customer_id) references customers(id);
+            ```
+    ## DQL (Data Query Language)
+    - next we will study the queries of sql , and we will use simple database (link in the repo)
+    - we need to restore it.
+        ```
+            restore database HR from dist 'path'
+        ```
+        - if you encounterd anything when you need to veiw the diagrams use the following approach
+        - you will need to change the owner of the database to the owner that connected to the server (in my case the systemowner)
+        - code:
+            ```
+                use HR;
+                exec sp_changedbowner 'sa';
+            ```
+            
 
 
 
