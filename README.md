@@ -67,6 +67,15 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [Full Backup](#full_backup)
     - [Differential Backup](#differential_backup)
     - [Restore Database](#restore_database)
+- [DML (Data Manipulation Language)](#dml-data-manipulation-language)
+    - [INSERT INTO](#insert_into)
+    - [UPDATE WHERE](#update_where)
+    - [DELETE WHERE](#delete_where)
+    - [SELECT INTO FROM](#select_into_from)
+    - [INSERT INTO SELECT FROM](#insert_into_select_from)
+    - [Auto Increment](#auto_increament)
+    - [Delete vs Truncate](#delete_vs_truncate)
+
 
 # What's A database
 - a database is an organized collection of data so that it can be easily accessed.
