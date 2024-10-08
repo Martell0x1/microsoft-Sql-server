@@ -719,5 +719,39 @@ Explore the world of Databases! Get started with quick access to all major secti
                 - this will inserting all the records from old_person table into the person table which it's age is >=30
         - to use this statment the existing table's columns must matches the old_table's columns.
 
+        ## Auto_Increament.
+        - in most of systems the primary key is set to be auto-incremented , in this section we will know how...
+            - syntax:
+                ```
+                    create table EMP(
+                        ID int identity(1,1) not null,
+                        name  nvarchar(50) not null,
+                        Primary key(ID)
+                    );
+                ```
+            - in the previous examble we created a new table with id and name attributes , the id is auto increamented using the `identity` function
+            which takes tow parameters `identity(increament,seed)` increament is how much you want to increament the id , seed is the starting value.
+
+            - please notice that if you deleted the table `delete from EMP` and tryed to insert new data ... `the id will not start from the seed , instead`
+            `it will start from the last value it had hold before deleting`
+
+            - ex:
+                ```
+                   delete from EMP; -- will delete the data from the table.
+                   insert into EMP Values ({any other columns except the id}); -- will insert some data
+                   select * from EMP; -- you will see that last id before deleting will be the first id in the new data 
+                ```
+            - please not if you insert the id column with insert into statment you will face this error `IDENTITY_INSERT is ON`
+            - to know the last id inserted in the table , you shall use this statment `print @@identity;` this is T-SQL will be discuesed later on.
+
+        ## Delete_VS_Truncate
+        - when deleting from a table it will delete the data from the table with a specific condition `where` and it will not reset the increment .
+        - while in the truncate statment it will delete the data from the table with out condition `not where` and it will reset the increment.
+            - syntax:
+                ```
+                    truncate table tbl_name;
+                ``` 
+            - if you excuted this statment `print @@identity` it will be 0;
+
 
 
