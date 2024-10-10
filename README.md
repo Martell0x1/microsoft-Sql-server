@@ -75,6 +75,14 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [INSERT INTO SELECT FROM](#insert_into_select_from)
     - [Auto Increment](#auto_increament)
     - [Delete vs Truncate](#delete_vs_truncate)
+    - [Foreign Key Constraint](#foreignkey_constraint)
+- [DQL (Data Query Language)](#dql-data-query-language)
+    - [Restoring the Database](#restoring-the-database)
+    - [SELECT_FROM](#select_from)
+    - [SELECT_DISTINCT](#select_distinct)
+    - [WHERE](#where)
+    - [IN Operator](#in_operator)
+    - [ORDER_BY](#order_by)
 
 
 # What's A database
