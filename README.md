@@ -826,7 +826,68 @@ Explore the world of Databases! Get started with quick access to all major secti
                 use HR;
                 exec sp_changedbowner 'sa';
             ```
-            
+        ### SELECT_FROM
+        - selecting columns from tables.
+            - syntax:
+                `select col1,col2,...coln from table_name;`
+            - ex:
+                `select * from employyes;` selecing all  columns from employees table
+                `select employees.* from employees;` same
+                `select ID,FirstName,LastName from employees;` selecting ID,firstbane,LastName from employees table.
+        ### SELECT_DISTINCT
+        - selecting distinct data from columns.
+            - syntax:
+                `select distinct col from table`
+            - ex:
+                `select distinct FirstName from Employees` selecing the distinct names from Employees table.
+                `select distinct FirstName,DepartmentID from Employees` selecting the distinct row which contains firstname and depID;
+        ### WHERE.
+        - we will know how to filter the data with conditions.
+            - syntax:
+                `[statment 1]  where [condition]`
+            - ex:
+                ```
+                    select *from Employees where Gendor='F';
+
+                    select *  from Employees where not MonthlySalary <=500;
+
+                    select *  from Employees where  MonthlySalary <=500;
+
+                                        
+                    select *  from Employees where  MonthlySalary <=500 and CountryID <>1; -- <> opertaor is not equal.
+
+                    select *  from Employees where  ExitDate is not null;
+                ```
+        ### In_Operator
+        - used with where statment to search in a set of values.
+        - ex:
+            ```
+                select * from Employees where DepartmentID in (1,2,7); -- will return the DepartmentID= 1 or 2 or 7;
+                                
+                select * from Employees where FirstName in ('jacob','Brooks','Harper');
+
+                select Departments.Name  from Departments 
+                	where ID in (select DepartmentID  from Employees where  MonthlySalary <=210); -- this  will select the department  name which has employees with salary <=210
 
 
+                select Departments.Name  from Departments 
+                    where ID not in (select DepartmentID  from Employees where  MonthlySalary <=210);
+            ```
+        ### Order_By
+        - sorting the data with order_by  statment
+        - ex:
+            ```
+                select ID,FirstName,MonthlySalary from Employees
+                	where DepartmentID=1 Order By FirstName; => sorting the result with /FirstName(Ascedning order by default).
 
+                select ID,FirstName,MonthlySalary from Employees
+	                where DepartmentID=1 Order By FirstName Desc; => sort them Desceding (Desc) keyword
+
+
+                select ID,FirstName,MonthlySalary from Employees
+                    where DepartmentID=1 Order By MonthlySalary ASC; => sort them Ascedning (ASC) keyword
+
+
+                select ID,FirstName,MonthlySalary from Employees
+                    where DepartmentID=1 Order By FirstName ASC,MonthlySalary desc; =>  sort the firstname Asc , salary desc;
+            ```
