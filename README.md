@@ -83,6 +83,14 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [WHERE](#where)
     - [IN Operator](#in_operator)
     - [ORDER_BY](#order_by)
+    - [SELECT_TOP](#select_top)
+    - [SELECT_AS](#select_as)
+    - [Between-Operator](#between-operator)
+    - [Group_By](#group_by)
+    - [Having](#having)
+    - [Like-Statement](#like-statement)
+    - [Wild-Cards](#wild-cards)
+- [Leet Code Questions](#leetcode)
 
 
 # What's A database
@@ -617,6 +625,14 @@ Explore the world of Databases! Get started with quick access to all major secti
                         restore database db_name
                             from disk = 'path';
                     ```
+            - if you running a dokcer-container:
+                - syntax:
+                    ```
+                        RESTORE DATABASE HR
+                        FROM DISK = '/opt/databases/HR_Database.bak' -- could be any path
+                        WITH MOVE 'HR_DB' TO '/var/opt/mssql/data/HR_DB.mdf', -- check env vars to know where .mdf files stored
+                            MOVE 'HR_DB_log' TO '/var/opt/mssql/data/HR_DB_log.ldf'; -- check env vars.
+                    ```
     ## DML (Data Manipulation Language)
     - this section will discuess DML
         ### INSERT_INTO
@@ -849,6 +865,7 @@ Explore the world of Databases! Get started with quick access to all major secti
             - ex:
                 `select distinct FirstName from Employees` selecing the distinct names from Employees table.
                 `select distinct FirstName,DepartmentID from Employees` selecting the distinct row which contains firstname and depID;
+      
         ### WHERE.
         - we will know how to filter the data with conditions.
             - syntax:
@@ -899,3 +916,175 @@ Explore the world of Databases! Get started with quick access to all major secti
                 select ID,FirstName,MonthlySalary from Employees
                     where DepartmentID=1 Order By FirstName ASC,MonthlySalary desc; =>  sort the firstname Asc , salary desc;
             ```
+
+        ### SELECT_TOP
+        - selecting top n rows from a colmn or top n percent.
+        - ex:
+            ```
+                select top 3 * from employees; returng first 3 rows in the database.
+                select top 10 percent * from employees; return first 10 percent of tows in the database.
+            ```
+        - ex , write a query that shows the firstname , id , salary of the top 3 paid employees.
+            ```
+                select distinct top 3 MonthlySalary from Employees 
+                    Order By MonthlySalary DESC;
+            ```
+            - this query shows the top 3 paid employees
+            ```
+                select Id,FirstName,LastName,MonthlySalary from Employees where MonthlySalary in(
+                    select distinct top 3 MonthlySalary from Employees 
+                        Order By MonthlySalary DESC;
+                ) Order By MonthlySalary DESC;
+            ```
+            - this is the answer for out task , we select the name , id , salary from the table , where salary is in the salary returned from the top 3 paid employees.
+
+          ### SELECT_AS
+        - selecting a row and renames it in the output , creating new values and expressions
+            - syntax:
+                `select col as new_col from table`
+            - ex:
+                `select distinct author_id as id from Views where author_id = viewer_id;`
+                `select A=5*4 , B =6/2 from Employees;`
+                `select ID ,FirstName ,A = MonthlySalary/2 from Employees`
+                `select ID , FirstName + ' ' + LastName as FullName From Employees;`
+                `select ID , FullName = FirstName + ' ' + LastName ,MonthlySalary , YearlySalary = MonthlySalary*12 From Employees;`
+                ```
+                    select ID , FullName = FirstName + ' ' + LastName ,MonthlySalary , YearlySalary = MonthlySalary*12 , BonusAmount =BonusPerc * MonthlySalary
+	                From Employees;
+                ```
+                ```
+                    select ID , FullName = FirstName + ' ' + LastName , Age = DATEDIFF(year,DateOfBirth,GETDATE()) from Employees;
+
+                ```
+                - DATEDIFF , GETDATE functions are explained in SQL-Functions section.
+            
+            ### Between-Operator
+            - compined with select statment ro return values in a range
+            - syntax: `Between R and L;` , such that R <= L
+            - ex: `select * from Empoyees where MonthlySalary Between 500 and 1000;`
+
+            ### Group_By
+            - groups rows rows that have the same values into summary rows, like "find the number of customers in each country"
+            - syntax: `select col_name from tbl_name where condition group by(col_name);`
+            - ex: 
+            ```
+                select DepartmentID,TotalCount =COUNT(MonthlySalary) ,
+                        TotalSum = SUM(MonthlySalary),
+                        Average = AVG(MonthlySalary),
+                        MinSalary=Min(MonthlySalary),
+                        MaxSalary=Max(MonthlySalary) from Employees Group BY(DepartmentID) order by (DepartmentID);
+            ```
+
+            - the previous statment will select the DepartmentID , and the other columns and groups them by the DepartmentId
+
+            - notice:
+            ```
+                select DepartmentID, TotalCount =COUNT(MonthlySalary) ,
+                                    TotalSum = SUM(MonthlySalary),
+                                    Average = AVG(MonthlySalary),
+                                    MinSalary=Min(MonthlySalary),
+                                    MaxSalary=Max(MonthlySalary) from Employees ;
+            ```
+            - the previous statment should fails as we select the totalcount , average , min,max .. for all departmenID in the database , so we can't then select the DepartmentId to be shown up.
+
+            ### Having
+            - the `Having` clause was added to SQL becuase `where` keyword cannot be used with `aggregate` functions in a direct way
+
+            - syntax: `select col from tabl where condition group by(col) HAVING condition;`
+            - ex:
+            ```
+                select DepartmentID,TotalCount =COUNT(MonthlySalary) ,
+                            TotalSum = SUM(MonthlySalary),
+                            Average = AVG(MonthlySalary),
+                            MinSalary=Min(MonthlySalary),
+                            MaxSalary=Max(MonthlySalary) from Employees Group BY(DepartmentID)
+                                                        Having Count(MonthlySalary) > 100 order by (DepartmentID);
+            ```
+            - the previous query will select the department , other columns and groups them by depID , with condition that the count of MonthlySalary > 100 (we can't use TotalCount in having as it's still doesn't exist) and order by the department id;
+
+            - since the where statment can't work with aggregate functions (directly), however there's a way to use it (indirectly) by creating a virtual-table.
+
+            - ex:
+            ```
+                select * from
+                (
+
+                    select DepartmentID,TotalCount =COUNT(MonthlySalary) ,
+                            TotalSum = SUM(MonthlySalary),
+                            Average = AVG(MonthlySalary),
+                            MinSalary=Min(MonthlySalary),
+                            MaxSalary=Max(MonthlySalary) from Employees Group BY(DepartmentID)
+                ) R1 where TotalCount > 100 order by (DepartmentID);
+            ```
+            - notice that the R1 is a `virtual-table` contains all the columns listed in the inner statment , so we can acess it and use where statment.
+
+            ### Like-Statment
+            - search and filter a specified pattern in a column.
+            - there're tow [WildCards](#wild-cards) used with Like statment:
+                - the `%` sign represents zero , one , or multiple charachters
+                - the `_` sign represents one , single charachter
+
+            - note that MS-Acess uses `* instead of %` and uses `? instead of _`
+
+            - ex(s):
+                ```
+                    select Id , FirstName from Employees
+                        where FirstName like 'a%';          // select the FirstName,Id for those FirstNames statrs with a
+
+                    select Id , FirstName from Employees
+                        where FirstName like '%a';          // select the FirstName,Id for those FirstNames ends with a
+
+                    select Id , FirstName from Employees
+                        where FirstName like '%tell%';      // select the FirstName,Id for those FirstNames have the        substring tell
+
+                    select Id , FirstName from Employees
+                        where FirstName like 'a%a';         // select the FirstName,Id for those FirstNames statrs,ends with a
+
+                    select Id , FirstName from Employees
+                        where FirstName like '_a%';         // select the FirstName,Id for those FirstNames the second letter is a
+
+                    select Id , FirstName from Employees
+                        where FirstName like '__a%';        // select the FirstName,Id for those FirstNames thee third letter is a
+
+                    select Id , FirstName from Employees
+                        where FirstName like 'a___%';       // select the FirstName,Id for those FirstNames statrs with a and have at least 3 charachters after a
+
+                    select Id , FirstName from Employees
+                        where FirstName like 'a%' or FirstName like 'b%';    // start with a or b
+                ```
+            
+            ### Wild-Cards
+
+
+
+        ### SQL-Functions
+        - the following section will demonstart a set of built-in functions in (SQL) that helps getting things done.
+        - all the following function  works for `NOT NULL` values.
+            #### LEN
+            - returns the length of varcahr /nvarchar / string
+            - syntax `LEN(col)`
+            - ex `select tweet_id from Tweets where LEN(content) > 15;`
+
+            ### Count
+            - returns the cound of rows meet a specific criterion(condition).
+            - ex: `select TotalCont = Count(MonthlySalary) From Employees where MonthlySalary Between 500 and 1000;`
+            - returns the count of employees that thier pay is from 500 to 1000.
+
+            ### SUM
+            - returns the sum of a numeric column.
+            - ex `select TotalSum =Sum(MonthlySalary) From Employees;`
+            - returns the sum of all salaries.
+
+            ### AVG
+            - returns the average value  in a numeric column.
+            - ex : `select Average=  AVG(MonthlySalary) from Employees;`
+            - ana zahakt....
+
+            ### Min
+            - returns the minimum value in a numeric column.
+            - ex: `select MinValue = Min(MonthlySalary) From Employees;`
+
+            ## Max
+            - returns the Maximum values in a numeric column.
+            - ex: `select MaxValue = Max(MonthlySalary) From Employees;`
+
