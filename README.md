@@ -48,48 +48,53 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [Convert Associative Entity](#convert-associative-entity)
     - [Summary](#summary)
 - [SQL](#sql)
-  - [DDL](#ddl)
-    - [Create Database](#create_database)
-    - [CREATE_DATABASE_IF_NOT_EXIST](#create_database_if_not_exist)
-    - [SWITCH_DATABASES](#switch_databases)
-    - [DROP_DATABASES](#drop_databaes)
-    - [DROP_IF_EXISTS](#drop_if_exists)
-    - [CREATE_TABLE](#create_table)
-    - [SQL_DATA_TYPES](#sql_data_types)
-    - [Table Alterations](#table-alterations)
-        - [Drop Table](#drop_table)
-        - [Add Column](#add_column)
-        - [Rename Column](#rename_column)
-        - [Rename Table](#rename_table)
-        - [Modify Column](#modify_column)
-        - [Delete Column](#delete_column)
-- [Database Backup and Restore](#backup_database)
-    - [Full Backup](#full_backup)
-    - [Differential Backup](#differential_backup)
-    - [Restore Database](#restore_database)
-- [DML (Data Manipulation Language)](#dml-data-manipulation-language)
-    - [INSERT INTO](#insert_into)
-    - [UPDATE WHERE](#update_where)
-    - [DELETE WHERE](#delete_where)
-    - [SELECT INTO FROM](#select_into_from)
-    - [INSERT INTO SELECT FROM](#insert_into_select_from)
-    - [Auto Increment](#auto_increament)
-    - [Delete vs Truncate](#delete_vs_truncate)
-    - [Foreign Key Constraint](#foreignkey_constraint)
-- [DQL (Data Query Language)](#dql-data-query-language)
-    - [Restoring the Database](#restoring-the-database)
-    - [SELECT_FROM](#select_from)
-    - [SELECT_DISTINCT](#select_distinct)
-    - [WHERE](#where)
-    - [IN Operator](#in_operator)
-    - [ORDER_BY](#order_by)
-    - [SELECT_TOP](#select_top)
-    - [SELECT_AS](#select_as)
-    - [Between-Operator](#between-operator)
-    - [Group_By](#group_by)
-    - [Having](#having)
-    - [Like-Statement](#like-statement)
-    - [Wild-Cards](#wild-cards)
+    - [DDL](#ddl)
+        - [Create Database](#create_database)
+        - [CREATE_DATABASE_IF_NOT_EXIST](#create_database_if_not_exist)
+        - [SWITCH_DATABASES](#switch_databases)
+        - [DROP_DATABASES](#drop_databaes)
+        - [DROP_IF_EXISTS](#drop_if_exists)
+        - [CREATE_TABLE](#create_table)
+        - [SQL_DATA_TYPES](#sql_data_types)
+        - [Table Alterations](#table-alterations)
+            - [Drop Table](#drop_table)
+            - [Add Column](#add_column)
+            - [Rename Column](#rename_column)
+            - [Rename Table](#rename_table)
+            - [Modify Column](#modify_column)
+            - [Delete Column](#delete_column)
+    - [Database Backup and Restore](#backup_database)
+        - [Full Backup](#full_backup)
+        - [Differential Backup](#differential_backup)
+        - [Restore Database](#restore_database)
+    - [DML (Data Manipulation Language)](#dml-data-manipulation-language)
+        - [INSERT INTO](#insert_into)
+        - [UPDATE WHERE](#update_where)
+        - [DELETE WHERE](#delete_where)
+        - [SELECT INTO FROM](#select_into_from)
+        - [INSERT INTO SELECT FROM](#insert_into_select_from)
+        - [Auto Increment](#auto_increament)
+        - [Delete vs Truncate](#delete_vs_truncate)
+        - [Foreign Key Constraint](#foreignkey_constraint)
+    - [DQL (Data Query Language)](#dql-data-query-language)
+        - [Restoring the Database](#restoring-the-database)
+        - [SELECT_FROM](#select_from)
+        - [SELECT_DISTINCT](#select_distinct)
+        - [WHERE](#where)
+        - [IN Operator](#in_operator)
+        - [ORDER_BY](#order_by)
+        - [SELECT_TOP](#select_top)
+        - [SELECT_AS](#select_as)
+        - [Between-Operator](#between-operator)
+        - [Group_By](#group_by)
+        - [Having](#having)
+        - [Like-Statement](#like-statement)
+        - [Wild-Cards](#wild-cards)
+        - [Joins](#joins)
+            - [Inner-Join](#inner-joinjoin)
+            - [Left-Join](#leftouter-join)
+            - [Right-Join](#rightouter-join)
+            - [Full-Join](#fullouter-join)
 - [Leet Code Questions](#leetcode)
 
 
@@ -1054,10 +1059,36 @@ Explore the world of Databases! Get started with quick access to all major secti
                 ```
             
             ### Wild-Cards
+            - used to substitute one or more charachter in a string.
+            - enhance the searchin process in  sql
+            ```
+                -------------------------------------------------------------------------------------------------------
+                symbole         |      Description                               |       example
+                -------------------------------------------------------------------------------------------------------
+                %               | Represents zero or more chars                  |   bl% finds bl in the start
+                --------------------------------------------------------------------------------------------------------
+                _               | Represents a single char                       |   h_t the first is h , the third is t
+                --------------------------------------------------------------------------------------------------------
+                []              |  a single char within brackets or range        | h[oa] h followed by o or a
+                -----------------------------------------------------------------------------------------------------------
+                ^               |   represents any char not in brackets or range | h[^oa] h followed by any chars but not a or o
+                ------------------------------------------------------------------------------------------------------------
 
+            ```
 
+            - ex: 
+            ```
+                select ID, FirstName , LastName from Employees
+                                where FirstName not like 'Mohamm[ea]d';
 
-        ### SQL-Functions
+                select ID, FirstName , LastName from Employees
+                                                where FirstName like '[abc]%'
+                                                ORDER BY (FirstName)DESC ;
+
+                select ID, FirstName , LastName from Employees
+                                                where FirstName like '[a-l]%';
+            ```
+        ### SQL-Functions (Aggregational-Functions)
         - the following section will demonstart a set of built-in functions in (SQL) that helps getting things done.
         - all the following function  works for `NOT NULL` values.
             #### LEN
@@ -1065,26 +1096,102 @@ Explore the world of Databases! Get started with quick access to all major secti
             - syntax `LEN(col)`
             - ex `select tweet_id from Tweets where LEN(content) > 15;`
 
-            ### Count
+            #### Count
             - returns the cound of rows meet a specific criterion(condition).
             - ex: `select TotalCont = Count(MonthlySalary) From Employees where MonthlySalary Between 500 and 1000;`
             - returns the count of employees that thier pay is from 500 to 1000.
 
-            ### SUM
+            #### SUM
             - returns the sum of a numeric column.
             - ex `select TotalSum =Sum(MonthlySalary) From Employees;`
             - returns the sum of all salaries.
 
-            ### AVG
+            #### AVG
             - returns the average value  in a numeric column.
             - ex : `select Average=  AVG(MonthlySalary) from Employees;`
             - ana zahakt....
 
-            ### Min
+            #### Min
             - returns the minimum value in a numeric column.
             - ex: `select MinValue = Min(MonthlySalary) From Employees;`
 
-            ## Max
+            #### Max
             - returns the Maximum values in a numeric column.
             - ex: `select MaxValue = Max(MonthlySalary) From Employees;`
 
+        ### Joins
+        - how to manipulate the data from more than one table and compine them in one table.
+        - The SQL JOIN is a command clause that combines records from two or more tables in a database
+        - Joins has 6 types , we  will study the most important 4:
+            - Inner Join
+            - Left join
+            - Right join
+            - Full outer Join
+            
+            ![joins](https://miro.medium.com/v2/resize:fit:1400/1*GigXPhr4Ue2zbrgIIoB8Lw.png)
+
+            #### Inner Join(Join)
+            - This is the most common type of join. Inner joins combine records from two tables whenever there are matching values in a field common to both tables
+            ![inner](https://www.programiz.com/sites/tutorial2program/files/inner-join-in-sql.png)
+
+            - syntax:
+                ```
+                    select columns from table1 INNER JOIN (or just JOIN) table2
+                    on table1.colname = table2.colname;
+                ```
+
+            - ex:
+                ```
+                    select Customers.CustomerID , Customers.Name , Orders.Amount from Customers
+                        Inner join Orders On Customers.CustomerID = Orders.CustomerID;
+                ```
+                - this query returns the result in the figure above.
+
+                ```
+                    select Employees.ID,Employees.FirstName,Employees.LastName , Departments.Name as DepartmentName, Countries.Name as CountryName
+                        from Employees JOIN Departments On Employees.DepartmentID = Departments.ID
+                                    JOIN Countries  On Employees.CountryID = Countries.ID;
+                ```
+                - in the above examble we have joined 3 tables , and we can do operations on them..
+                ```
+                    select Employees.ID,Employees.FirstName,Employees.LastName , Departments.Name as DepartmentName, Countries.Name as CountryName
+                        from Employees JOIN Departments On Employees.DepartmentID = Departments.ID
+                                    JOIN Countries  On Employees.CountryID = Countries.ID
+                                        where Countries.Name = 'USA';
+                ```
+            
+            ### Left(outer) Join
+            - returns all records from the left table , and the matching records from the right table , the result is NULL records from the right side , if there's no match
+            ![outer](https://www.programiz.com/sites/tutorial2program/files/left-join-in-sql.png)
+
+            - ex:
+                ```
+                    select Customers.CustomerID ,Customers.Name ,Orders.Amount
+                        From Customers
+                        Left Join Orders
+                        ON Customers.CustomerID = Orders.CustomerID;
+                ```
+
+            ### Right(outer) join
+            - returns all records from the right table , and the matching records from the left table.
+            ![left](https://www.programiz.com/sites/tutorial2program/files/right-join-in-sql.png)
+
+            - ex:
+                ```
+                    select Customers.CustomerID ,Customers.Name ,Orders.Amount
+                        From Customers
+                        right Join Orders
+                        ON Customers.CustomerID = Orders.CustomerID;
+                ```
+
+            ### Full(outer) join
+            - returns all data from both right and left tables.
+            ![full](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq5NmcBuu-AICMO2LtjH8SzmGLPQO9RQowsg&s)
+
+            - ex:
+                ```
+                    select Customers.CustomerID ,Customers.Name ,Orders.Amount
+                        From Customers
+                        full Join Orders
+                        ON Customers.CustomerID = Orders.CustomerID;
+                ```
