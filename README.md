@@ -101,6 +101,8 @@ Explore the world of Databases! Get started with quick access to all major secti
     - [Views](#views)
     - [More About Constraints](#more-about-constrains)
         - [Primary Key Constraint](#primary-key-constrains)
+        - [Foreign Key Constraint](#foreign-key-constraint)
+        - [Not Null Constraint](#not-null-constraint)
 - [Leet Code Questions](#leetcode)
 
 
@@ -1397,4 +1399,63 @@ Explore the world of Databases! Get started with quick access to all major secti
                 ALTER TABLE Persons
                     DROP CONSTRAINT PK_Person;
             ```
+    
+    ### FOREIGN KEY Constraint
+    - Basic Info:
+        - The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+        - A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+
+    - Creating the Foreign Key Constraint.
+        - Using Create Table:
+            ```
+                CREATE TABLE Orders (
+                    OrderID int NOT NULL PRIMARY KEY,
+                    OrderNumber int NOT NULL,
+                    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+                );
+            ```
+            - To allow naming of a FOREIGN KEY constraint, and for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
+                ```
+                    CREATE TABLE Orders (
+                        OrderID int NOT NULL,
+                        OrderNumber int NOT NULL,
+                        PersonID int,
+                        PRIMARY KEY (OrderID),
+                        CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID)
+                        REFERENCES Persons(PersonID)
+                    );
+                ```
+    - Using Alter Table:
+        - ex(s):
+            ```
+            ALTER TABLE Orders
+                ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+            ALTER TABLE Orders
+                ADD CONSTRAINT FK_PersonOrder
+                FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+            ```
+    - Drop Foreign Key constraint:
+        ```
+            ALTER TABLE Orders
+                DROP CONSTRAINT FK_PersonOrder;
+        ```
+
+    ### Not Null Constraint
+    - not null is a column level constraint
+    - The following SQL ensures that the "ID", "LastName", and "FirstName" columns will NOT accept NULL values when the "Persons" table is created:
+        ```
+            CREATE TABLE Persons (
+            ID int NOT NULL,
+                LastName varchar(255) NOT NULL,
+            FirstName varchar(255) NOT NULL,
+            Age int
+            );
+        ```
+
+    - Alter Table:
+        ```
+            ALTER TABLE Persons
+                ALTER COLUMN Age int NOT NULL;
+        ```
     
