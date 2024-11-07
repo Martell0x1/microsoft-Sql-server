@@ -88,13 +88,19 @@ Explore the world of Databases! Get started with quick access to all major secti
         - [Between-Operator](#between-operator)
         - [Group_By](#group_by)
         - [Having](#having)
-        - [Like-Statement](#like-statement)
+        - [Like-Statement](#like-statment)
         - [Wild-Cards](#wild-cards)
+        - [Exists](#exists)
+        - [Union](#union)
+        - [Case](#case)
         - [Joins](#joins)
             - [Inner-Join](#inner-joinjoin)
             - [Left-Join](#leftouter-join)
             - [Right-Join](#rightouter-join)
             - [Full-Join](#fullouter-join)
+    - [Views](#views)
+    - [More About Constraints](#more-about-constrains)
+        - [Primary Key Constraint](#primary-key-constrains)
 - [Leet Code Questions](#leetcode)
 
 
@@ -1118,6 +1124,113 @@ Explore the world of Databases! Get started with quick access to all major secti
             #### Max
             - returns the Maximum values in a numeric column.
             - ex: `select MaxValue = Max(MonthlySalary) From Employees;`
+        - note that:
+            `If you use an aggregate function and select other columns, you must use a GROUP BY clause to tell SQL how to group the non-aggregated columns.`
+
+        ### Exists
+        - The EXISTS operator is used to test for the existence of any record in a subquery.
+        - The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+        ```
+            select X='yes'
+            where  exists 
+            ( 
+                select * from Orders
+                where customerID= 3 and Amount < 600
+                )
+
+
+            select * from Customers T1
+            where 
+            exists 
+            ( 
+                select * from Orders
+                where customerID= T1.CustomerID and Amount < 600
+                )
+
+            --More optimized and faster
+            select * from Customers T1
+            where 
+            exists 
+            ( 
+                select top 1 * from Orders
+                where customerID= T1.CustomerID and Amount < 600
+                )
+
+
+            --More optimized and faster
+            select * from Customers T1
+            where 
+            exists 
+            ( 
+                select top 1 R='Y'  from Orders
+                where customerID= T1.CustomerID and Amount < 600
+                )
+        ```
+
+        ### union
+        - The UNION operator is used to combine the result-set of two or more SELECT statements.
+            - Every SELECT statement within UNION must have the same number of columns
+            - The columns must also have similar data types
+            - The columns in every SELECT statement must also be in the same order
+            - Union is selecting the distinct elements from each set.
+
+        ```
+            select * from ActiveEmployees
+
+            select * from ResignedEmployees
+
+
+            select * from ActiveEmployees
+            Union
+            select * from ResignedEmployees
+
+            --this will remove the redundancy from the resultset (distinct results only)
+            select * from Departments
+            union 
+            select * from Departments;
+
+            --this will append data regardeless of any redundancy
+            select * from Departments
+            union ALL
+            select * from Departments;
+        ```
+
+        ### case
+        - The CASE expression goes through conditions and returns a value when the first condition is met (like an if-then-else statement). So, once a condition is true, it will stop reading and return the result. If no conditions are true, it returns the value in the ELSE clause.
+        - If there is no ELSE part and no conditions are true, it returns NULL.
+        - syntax:
+        ```
+            CASE
+                WHEN condition1 THEN result1
+                WHEN condition2 THEN result2
+                WHEN conditionN THEN resultN
+                ELSE result
+            END;
+        ```
+
+        - ex:
+        ```
+            select ID , FirstName , LastName , GenderTitle =
+            case
+                when Gendor = 'f' then 'Female'
+                when Gendor = 'm' then 'Male'
+                else 'Unkown'
+            end,
+            Status=
+            case
+                when ExitDate is null then 'Active'
+                when ExitDate is not null then 'Deacyive'
+            end,
+            NewSalary=
+            case
+                when Gendor = 'f' then MonthlySalary * 1.15
+                when Gendor = 'm' then MonthlySalary * 1.1
+                else MonthlySalary
+            end
+
+            from Employees
+        ```
 
         ### Joins
         - how to manipulate the data from more than one table and compine them in one table.
@@ -1195,3 +1308,93 @@ Explore the world of Databases! Get started with quick access to all major secti
                         full Join Orders
                         ON Customers.CustomerID = Orders.CustomerID;
                 ```
+    ## Views
+    - In SQL, a view is a virtual table based on the result-set of an SQL statement.
+
+    - A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.
+
+    - You can add SQL statements and functions to a view and present the data as if the data were coming from one single table.
+    
+    - A view always shows up-to-date data! The database engine recreates the view, every time a user queries it.
+
+    - ex:
+        ```
+        use HR;
+        create view data1 as
+            select * from Employees where ExitDate is null;
+
+        select * from data1;
+        ```
+
+    ## More About Constrains
+    - Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+    - Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+    - NOT NULL - Ensures that a column cannot have a NULL value
+    - UNIQUE - Ensures that all values in a column are different
+    - PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+    - FOREIGN KEY - Prevents actions that would destroy links between tables
+    - CHECK - Ensures that the values in a column satisfies a specific condition
+    - DEFAULT - Sets a default value for a column if no value is specified
+    - CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+    - Constraints can be specified when the table is created with the `CREATE TABLE` statement, or after the table is created with the `ALTER TABLE` statement.
+    - syntax:
+    ```
+        CREATE TABLE table_name (
+            column1 datatype constraint,
+            column2 datatype constraint,
+            column3 datatype constraint,
+            ....
+        );
+    ```
+
+    ### primary Key Constrains
+    - Basic Info:
+        The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+        Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+        A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+    - Creating the Primary Key Constraint:
+        - Using Create Table:
+            - ex:
+                ```
+                    CREATE TABLE Persons (
+                        ID int NOT NULL PRIMARY KEY,
+                        LastName varchar(255) NOT NULL,
+                        FirstName varchar(255),
+                        Age int
+                    );
+                ```
+            - To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+            ```
+                CREATE TABLE Persons (
+                    ID int NOT NULL,
+                    LastName varchar(255) NOT NULL,
+                    FirstName varchar(255),
+                    Age int,
+                    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+                );
+            ```
+        - Using Alter Table:
+         - To create a PRIMARY KEY constraint on the "ID" column when the table is already created, use the following SQL:
+            ```
+                ALTER TABLE Persons
+                    ADD PRIMARY KEY (ID);
+            ```
+        - To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+            ```
+                alter table Persons
+                    Add constraint PK_Person Primary Key(ID,First);
+            ```
+        - Note: If you use ALTER TABLE to add a primary key, the primary key column(s) must have been declared to not contain NULL values (when the table was first created).
+
+    - Drop Primary Key Constraint:
+        - To drop a PRIMARY KEY constraint, use the following SQL:
+            ```
+                ALTER TABLE Persons
+                    DROP CONSTRAINT PK_Person;
+            ```
+    
