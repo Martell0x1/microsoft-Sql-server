@@ -103,6 +103,10 @@ Explore the world of Databases! Get started with quick access to all major secti
         - [Primary Key Constraint](#primary-key-constrains)
         - [Foreign Key Constraint](#foreign-key-constraint)
         - [Not Null Constraint](#not-null-constraint)
+        - [Default Constraint](#default-constraint)
+        - [Unique Constraint](#unique-constraint)
+        - [Check Constraint](#check-constraint)
+    - [Indexing](#idexing)
 - [Leet Code Questions](#leetcode)
 
 
@@ -1458,4 +1462,96 @@ Explore the world of Databases! Get started with quick access to all major secti
             ALTER TABLE Persons
                 ALTER COLUMN Age int NOT NULL;
         ```
+
+    ## default constraint
+    - The DEFAULT constraint is used to set a default value for a column.
+    - The default value will be added to all new records, if no other value is specified.
+    - create default constraint using create table:
+        ```
+            CREATE TABLE Persons (
+                ID int NOT NULL,
+                LastName varchar(255) NOT NULL,
+                FirstName varchar(255),
+                Age int,
+                City varchar(255) DEFAULT 'Amman'
+            );
+        ```
+        - The DEFAULT constraint can also be used to insert system values, by using functions like `GETDATE()`:
+            ```
+                CREATE TABLE Orders (
+                    ID int NOT NULL,
+                    OrderNumber int NOT NULL,
+                    OrderDate date DEFAULT GETDATE()
+                );
+            ```
+    
+    - create using Alter table
+        ```
+            alter table persons
+                add constraints DF_city Default 'aman' for City
+        ```
+    - droping it:
+        ```
+            alter table Persons
+                drop CONSTRAINT df_city;
+        ```
+    
+    ## check constraint
+    - The CHECK constraint is used to limit the value range that can be placed in a column.
+    - If you define a CHECK constraint on a column it will allow only certain values for this column.
+    - If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+    - creating it:
+        ```
+        create table Persons(
+            id int not null,
+            lastname varchar(255) not null,
+            firstname varchar(255) not null,
+            age int ,
+            city varchar(255),
+            constraint Chk_person check(age >=18 and city = 'aman')
+        );
+
+        ```
+    - droping it , it's the same as the above examples mate2rfnash m3ak
+
+    ## unique constraint
+    - The UNIQUE constraint ensures that all values in a column are different.
+    - Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+    - A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+    - However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+
+    - create table:
+        ```
+            CREATE TABLE Persons (
+            ID int NOT NULL UNIQUE,
+            LastName varchar(255) NOT NULL,
+            FirstName varchar(255),
+            Age int
+            );
+        ```
+
+        ```
+            CREATE TABLE Persons (
+            ID int NOT NULL,
+            LastName varchar(255) NOT NULL,
+            FirstName varchar(255),
+            Age int,
+                CONSTRAINT UC_Person UNIQUE (ID,LastName)
+            );
+        ```
+
+    - using alter table:
+        ```
+            ALTER TABLE Persons
+                ADD UNIQUE (ID);
+        ```
+    - droping:
+        ```
+            ALTER TABLE Persons
+                DROP CONSTRAINT UC_Person;
+        ```
+
+
+
     
