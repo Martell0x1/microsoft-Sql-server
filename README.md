@@ -1551,6 +1551,56 @@ Explore the world of Databases! Get started with quick access to all major secti
             ALTER TABLE Persons
                 DROP CONSTRAINT UC_Person;
         ```
+    
+    # Indexing
+    - Index = B-Tree (data structure)
+    - indexes are a way to make the data retrieval operations more faster than otherwise
+    - the indexes creates a hidden table that table sort the data by the attribute we want to make an index for it (non-clusterd index)
+    - a normal table has an existing index called (clusterd-index) it sortes the data by the primary key of the table
+    - note that updating operations takes time on the indexed table (as if we update the normal table we will need to update the indexed table)
+    so make sure that the indexes are being applied to the attribues that i frequently searching for.
+    - the physical index (primarykey) is faster than the non-clusterd index.
+
+    ```
+        create index idx1
+        on Person(FirstName);
+    ```
+    ```
+        drop index Person.idx1;
+    ```
+
+    # Normalization
+    - The Normalization Process if the process of organizing data in database in a way to reduce data anamolies such as data redundancy and data inconsistency.
+    - We break down the the large database into smaller , managable pieces while ensuring the data is free from redundancies and consisntent.
+    - Normalization is Acheived By applying a set of rules Called normal forms , the higher normal form the more restrictions applyed.
+    
+    ## First Normal Form (1NF)
+    - A primary key: A unique identifier for each record in the table.
+
+    - Atomic values: Each column should contain only a single value, and each value should be indivisible.
+            • Note: Here, atomicity states that a single cell cannot hold multiple values. It must hold only a single-valued attribute.
+            • The First normal form disallows the multi-valued attribute, composite attribute, and their combinations.
+            
+    - No repeating groups: Each column should have a distinct name, and there should be no repeating groups of columns.
+    ![1NF](https://lh5.googleusercontent.com/proxy/iyY8A68SxR-4zhmTP3mardqAqzNvKiENsZzix9MwtI-e0phtl_z2O3rRuBpffJqxBMBxBAXZJXoygRwIBfwXF8kU8pqe1Q)
+
+    - to optain 2NF , 1NF must be hold.
+
+    ## Second Normal Form (2NF)
+    - Second Normal Form (2NF) is a further level of database normalization that builds on the First Normal Form (1NF) rules.
+    - It requires that each non-key column in a table be functionally dependent on the entire primary key, not just a part of it.
+    - No partial dependencies: Each non-key column in the table must be fully dependent on the entire primary key.
+    ![2NF](https://static.takeuforward.org/content/normalisation-2-2TzjvbU_)
+
+    ## Third Normal Form (3NF)
+    - Third Normal Form (3NF) is a higher level of database normalization that builds on the rules of First Normal Form (1NF) and Second Normal Form (2NF). It requires that each nonkey column in a table be dependent only on the primary key, and not on any other non-key columns.
+    - No transitive dependencies: Each non-key column in the table must be dependent only on the primary key, and not on any other non-key columns.
+    ![3NF](https://imgur.com/a/UOykbdp)
+
+    ## Boyce-Codd Normal Form (BCNF)
+    - to be continued...
+
+    
 
 
 
