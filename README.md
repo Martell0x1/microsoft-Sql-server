@@ -111,7 +111,8 @@ Explore the world of Databases! Get started with quick access to all major secti
         - [First Noram From - 1NF](#first-normal-form-1nf)
         - [Second Normal From - 2NF](#second-normal-form-2nf)
         - [Third Normal From - 3NF](#third-normal-form-3nf)
-- [Leet Code Questions](#leetcode)
+        - [Boyce-Codd Normal From - BCNF](#boyce-codd-normal-form-bcnf)
+- [Leet Code Questions](#leet-code-problems)
 
 
 # What's A database
@@ -1603,6 +1604,9 @@ Explore the world of Databases! Get started with quick access to all major secti
 
     ## Boyce-Codd Normal Form (BCNF)
     - to be continued...
+
+# Leet Code problems
+-  To be continued....
 
     
 
