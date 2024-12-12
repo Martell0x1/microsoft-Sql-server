@@ -107,6 +107,10 @@ Explore the world of Databases! Get started with quick access to all major secti
         - [Unique Constraint](#unique-constraint)
         - [Check Constraint](#check-constraint)
     - [Indexing](#idexing)
+    - [Normalization](#normalization)
+        - [First Noram From - 1NF](#first-normal-form-1nf)
+        - [Second Normal From - 2NF](#second-normal-form-2nf)
+        - [Third Normal From - 3NF](#third-normal-form-3nf)
 - [Leet Code Questions](#leetcode)
 
 
