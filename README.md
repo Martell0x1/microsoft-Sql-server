@@ -269,6 +269,8 @@ Explore the world of Databases! Get started with quick access to all major secti
 - An Entity = row or record
 - ex , A student Enrolled in course [student]-------(Enrolled)----->[courses]
 - You can acheive Entity Integrity by having only strong Entities in ur ER diagram
+- Strong Entity does not require another entity in it's work ... it's independenant
+- Weak Entity does require another entity to function
 
 ## Attributes
 - attribues is represented in ERD like this:
