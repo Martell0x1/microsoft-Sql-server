@@ -376,134 +376,48 @@ Explore the world of Databases! Get started with quick access to all major secti
     ## Erd site
     - this site is pretty good for designing ERD [erdplus](https://erdplus.com/)
 
-    ## Associative Entities / Aggregation
-    - an entity that comes up from connecting a relation with another relation.
-    - it's called `junction table` , `linking table` , `cross-reference table`.
-    - by using Aggregation / associative-entity , we can represent complex relationships between entities in a structured and efficeint way , without having to duplicate data or create confusing relationships and avoid data redundancy , making it a useful concept om database design.
-    - we call it Aggregation becouse when an entity has a relationship with another relationship , a relation with it's corresponding entities is Aggregated into a higher level entity. Aggregation is an abstract through which we can represent relationship as higher level entity set. 
+  ## Associative Entities / Aggregation
+- an entity that comes up from connecting a relation with another relation.
+- it's called `junction table` , `linking table` , `cross-reference table`.
+- by using Aggregation / associative-entity , we can represent complex relationships between entities in a structured and efficeint way , without having to duplicate data or create confusing relationships and avoid data redundancy , making it a useful concept om database design.
+- we call it Aggregation becouse when an entity has a relationship with another relationship , a relation with it's corresponding entities is Aggregated into a higher level entity. Aggregation is an abstract through which we can represent relationship as higher level entity set. 
 
-    - [see me](https://www.sciencedirect.com/topics/computer-science/associative-entity)
+- [see me](https://www.sciencedirect.com/topics/computer-science/associative-entity)
 
-    ## Generalization.
-    - when we have more than one entity that share many attributes , we can make another entity and make thos entities inherite the base entity usnig the `bottom-up approach`
-    - it's represented in ERD using this traingle:
-        ```
-            |
-        /   \
-        / IS  \
-        /   A   \
-    /---------\
+## Generalization.
+- when we have more than one entity that share many attributes , we can make another entity and make thos entities inherite the base entity usnig the `bottom-up approach`
+- it's represented in ERD using this traingle:
     ```
-    - please note that the head must be at top and the base must be at bottom.
-    - just remember that Generalization is just like inhertance in OOP
-    - ex `from student with name and age related with employee with name and age ==> to person who relates with both student and employee`
-    - [see me](https://technogeekscs.com/generalization-in-dbms/)
-    ![Generalization](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMYfBruM6p99MIbjYlaPILZk2fKT_FHTT6dpn-FRER3s0DZ3ua6kv5SDsY-0sKWjs74qeM0yrWnClPRbrShUg-fC4DlfbFtXbYsk6kv2Y7anw4puGAMizWyFukAYMGw1bBq_rAiB5sj4yTIlKqrUgFFF3p9t6qETWSDbaT_k6Yyii4_IWvd3K4Be-I/s811/DBMS.png)
+        |
+      /   \
+     / IS  \
+    /   A   \
+   /---------\
+   ```
+- please note that the head must be at top and the base must be at bottom.
+- just remember that Generalization is just like inhertance in OOP
+- ex `from student with name and age related with employee with name and age ==> to person who relates with both student and employee`
+- [see me](https://technogeekscs.com/generalization-in-dbms/)
+![Generalization](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMYfBruM6p99MIbjYlaPILZk2fKT_FHTT6dpn-FRER3s0DZ3ua6kv5SDsY-0sKWjs74qeM0yrWnClPRbrShUg-fC4DlfbFtXbYsk6kv2Y7anw4puGAMizWyFukAYMGw1bBq_rAiB5sj4yTIlKqrUgFFF3p9t6qETWSDbaT_k6Yyii4_IWvd3K4Be-I/s811/DBMS.png)
 
-    ## Specialization.
-    - Specialization is a `top-down approach` in which a higher-level entity is divided into multiple specialized lower-level entities
-    - an entity is devided into sub entities with same charactristics.
-    - ex: `from employee to developer`, `from employee to teacher`,...etc
+## Specialization.
+- Specialization is a `top-down approach` in which a higher-level entity is divided into multiple specialized lower-level entities
+- an entity is devided into sub entities with same charactristics.
+- ex: `from employee to developer`, `from employee to teacher`,...etc
 
-    - it's represented in ERD using this traingle:
-        ```
-        \--------/
-        \  IS  /
-        \  A /
-        \  /
-            |
-            |
-        ```
-    ![Spec](https://media.geeksforgeeks.org/wp-content/uploads/20200422233542/Specialisation_1.jpg)
-    - [see me](https://www.geeksforgeeks.org/generalization-specialization-and-aggregation-in-er-model/)
-    # Relational Schema.
-    - a set of relational tables and associateed items that are related to each other.
-    - relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
+- it's represented in ERD using this traingle:
+    ```
+    \--------/
+     \  IS  /
+      \  A /
+       \  /
+         |
+         |
+    ```
+![Spec](https://media.geeksforgeeks.org/wp-content/uploads/20200422233542/Specialisation_1.jpg)
+- [see me](https://www.geeksforgeeks.org/generalization-specialization-and-aggregation-in-er-model/)
 
-        ## convert Self Referntial.
-        - if we though in the employee examble `(employee)------<manages>---->(employee)`
-        - we then design it as follows: in the same table we add a foreign key field to the primary key of the table.
-        ```
-            Employee
-            -----------------
-            PK | EmpID 
-            | Name   
-            | Salary
-            FK | ManagerID
-            ------------------
-        ```
 
-        ## convert Composite / MultiValued / Derived Attributes
-        - in composite attribute we take the roots of the tree ex , name-> firstname, lastname , we take firstname and lastname as attributes
-        - in derived attribute we ignore it.
-        - in mutlivalued attributes we make a new entity for it and the public key of the original entity has a foreign key to that table with the same name
-
-        ex:
-            ```
-            (student)
-                (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))
-            ```
-            - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
-            - so this becomes this:
-                ```
-
-                    Student                             Phone
-                    ---------------------               -------------
-                    PK  |   StudentId   |----------       Pk | PhoneID
-                        |   Firstname   |         |          | Phone
-                        |   LastName    |         |-----> FK | StudentID
-                    ---------------------               ---------------
-                    
-                ```
-        ## Convert one-to-one relationship
-        - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
-        - ex:
-            `Employee <-----> Acess-card`
-            - first solution
-                ```
-                    Employee                AcessCard
-                    ---------               -----------
-                    PK  | EmployeeID ----   PK  | CardId
-                        | Name          |       | serial num
-                        ...              -> FK  | EmployeeID
-                    ------------            ------------------
-                ```
-            - second solution (this is prefered)
-                ```
-                    Employee            AcessCard
-                    ------------        ---------
-                    PK  | EmpID    ---- PK | cardID
-                        | Name     |       | Serial num
-                    FK  | CardID  <-     ----------------
-                ```
-        ## Convert One-to-Many relationship.
-
-        - ex:
-            `Employee <<<--(works in)---> Department`
-
-        ## convert Many-to-Many relationship
-        - when deailing with many-to-many relationships , you must consider creating the `Bridge Table`, that has the public keys of both other tables as a foreign keys
-        ![Many-To-Many-Relational-Schema](https://miro.medium.com/v2/resize:fit:1400/1*e5ifCgUhYJmgdl0PKEam8g.png)
-        - the middle table is called `Bridge table / Bridge Entity`
-
-        - note that in the bridge table the tow foriegn keys must be foriegn keys not primary keys , imagine the system when having a student can enroll in course , so we will end up with 3 tables (student , enrollment , course) , if we take the tow primary keys of the tow other tables and put them as a primary keys in the enrolmment table , an edge case will be ingored which is when a student fails in a course he can retake it , but with using the primary keys this will not be able to be achieved , as the primary key is unqiue.
-
-        ## Covert Generalization , Specialization.
-        - Take the Primary key from parent and put it in the child as a forign key.
-        
-        ## Convert Assocative Entity.
-        - same as converting many-to-many , but here there will be another table related with the associative entity , we will take it's primary key and put it as a foreign key in the Bridge Entity.
-
-        ![Associative](https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
-
-        ## Summary
-        - Self-Refrential               One Entity that have a foriegn key that points to thye primary key
-        - Attributes                    ignore the derived attribute , take the childs of the composit attributes , create a new table for the mutlivalued attrivutes.
-        - Generalization , Specailization   Take the Primary key of the parent and put it as a foreign key in the child.
-        - One-To-One                    take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
-        - One-To-many / Many-To-One     take the primary key of one side and put it as a forign key in the many  side.
-        - many-to-many                  Create a Bridge Table , take the primary key of the tow talbes , put them as a foriegn key in the bridge table
-        - Assocative                    same as many-to-many , but now you have to add other tables to the bridge table.
 ## EERD (Extended Entity Relationship diagram)
 - an eerd is a simplification for the parent-child (superclass-subclass) relationship
 - eerd objects are used when there's data redundancy , which can be generalized / specialized into a superclass or subclass.
@@ -533,6 +447,94 @@ Explore the world of Databases! Get started with quick access to all major secti
     - hence there're tow terms that came up.
     - Hierarchy: every subclass has only one superclass in a tree structure (single inheritance).
     - Lattice: a subclass can be inherite from more than one superclass (Multiple inheritance).
+  # Relational Schema.
+- a set of relational tables and associateed items that are related to each other.
+- relation schema defines the design and structure of the relation like it consists of the relation name , set of attributes/fields , names/columns , every attribute would have an associated Domain
+
+    ## convert Self Referntial.
+    - if we though in the employee examble `(employee)------<manages>---->(employee)`
+    - we then design it as follows: in the same table we add a foreign key field to the primary key of the table.
+    ```
+        Employee
+        -----------------
+        PK | EmpID 
+           | Name   
+           | Salary
+        FK | ManagerID
+        ------------------
+     ```
+
+    ## convert Composite / MultiValued / Derived Attributes
+    - in composite attribute we take the roots of the tree ex , name-> firstname, lastname , we take firstname and lastname as attributes
+    - in derived attribute we ignore it.
+    - in mutlivalued attributes we make a new entity for it and the public key of the original entity has a foreign key to that table with the same name
+
+    ex:
+        ```
+        (student)
+            (<stdudentID>) , (name)->((firstname),(lastname)) , (/age/) , ((phone))
+        ```
+        - we have studentId as a primary key , name as a composite attribute , age as a derived ,, phone as mutlivalued
+        - so this becomes this:
+            ```
+
+                Student                             Phone
+                ---------------------               -------------
+                PK  |   StudentId   |----------       Pk | PhoneID
+                    |   Firstname   |         |          | Phone
+                    |   LastName    |         |-----> FK | StudentID
+                ---------------------               ---------------
+                
+            ```
+    ## Convert one-to-one relationship
+    - take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
+    - ex:
+        `Employee <-----> Acess-card`
+        - first solution
+            ```
+                Employee                AcessCard
+                ---------               -----------
+                PK  | EmployeeID ----   PK  | CardId
+                    | Name          |       | serial num
+                    ...              -> FK  | EmployeeID
+                ------------            ------------------
+            ```
+        - second solution (this is prefered)
+            ```
+                Employee            AcessCard
+                ------------        ---------
+                PK  | EmpID    ---- PK | cardID
+                    | Name     |       | Serial num
+                FK  | CardID  <-     ----------------
+            ```
+    ## Convert One-to-Many relationship.
+
+    - ex:
+        `Employee <<<--(works in)---> Department`
+
+    ## convert Many-to-Many relationship
+    - when deailing with many-to-many relationships , you must consider creating the `Bridge Table`, that has the public keys of both other tables as a foreign keys
+    ![Many-To-Many-Relational-Schema](https://miro.medium.com/v2/resize:fit:1400/1*e5ifCgUhYJmgdl0PKEam8g.png)
+    - the middle table is called `Bridge table / Bridge Entity`
+
+    - note that in the bridge table the tow foriegn keys must be foriegn keys not primary keys , imagine the system when having a student can enroll in course , so we will end up with 3 tables (student , enrollment , course) , if we take the tow primary keys of the tow other tables and put them as a primary keys in the enrolmment table , an edge case will be ingored which is when a student fails in a course he can retake it , but with using the primary keys this will not be able to be achieved , as the primary key is unqiue.
+
+    ## Covert Generalization , Specialization.
+    - Take the Primary key from parent and put it in the child as a forign key.
+    
+    ## Convert Assocative Entity.
+    - same as converting many-to-many , but here there will be another table related with the associative entity , we will take it's primary key and put it as a foreign key in the Bridge Entity.
+
+    ![Associative](https://miro.medium.com/v2/resize:fit:704/1*-h54ZLPXdamjmtqRqk_8PQ.png)
+
+    ## Summary
+    - Self-Refrential               One Entity that have a foriegn key that points to thye primary key
+    - Attributes                    ignore the derived attribute , take the childs of the composit attributes , create a new table for the mutlivalued attrivutes.
+    - Generalization , Specailization   Take the Primary key of the parent and put it as a foreign key in the child.
+    - One-To-One                    take one of the primary key of one entity and put it as a foriegn key in the second table or vice-versa
+    - One-To-many / Many-To-One     take the primary key of one side and put it as a forign key in the many  side.
+    - many-to-many                  Create a Bridge Table , take the primary key of the tow talbes , put them as a foriegn key in the bridge table
+    - Assocative                    same as many-to-many , but now you have to add other tables to the bridge table.
 
 # SQL
 - in this section we wil put our hands on SQL queires using SQL-Server-Managment-Studio
